@@ -28,6 +28,7 @@
     "siema": "^1.4.9"
   },
   "devDependencies": {
+    "@types/siema": "^1.4.2",
     "@types/react": "^16.0.34",
     "@types/react-dom": "^16.0.3",
     "tslint": "5.8.0",
