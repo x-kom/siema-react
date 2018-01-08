@@ -1,48 +1,51 @@
 {
-  "name": "siema-react",
-  "version": "0.0.1",
-  "description": "React binding to lightweight slider library named Siema",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/aczekajski/siema-react.git"
-  },
-  "keywords": [
-    "react",
-    "siema",
-    "slider",
-    "carousel"
-  ],
-  "author": "arkadiusz.czekajski@x-kom.pl",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/aczekajski/siema-react/issues"
-  },
-  "homepage": "https://github.com/aczekajski/siema-react#readme",
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "siema": "^1.4.9"
-  },
-  "devDependencies": {
-    "@types/siema": "^1.4.2",
-    "@types/react": "^16.0.34",
-    "@types/react-dom": "^16.0.3",
-    "tslint": "5.8.0",
-    "tslint-consistent-codestyle": "1.11.0",
-    "tslint-eslint-rules": "4.1.1",
-    "tslint-immutable": "4.5.0",
-    "tslint-microsoft-contrib": "5.0.1",
-    "tslint-react": "3.2.0",
-    "typescript": "^2.6.2",
-    "ts-jest": "21.2.4",
-    "ts-node": "^4.0.2",
-    "webpack": "3.10.0",
-    "webpack-dev-server": "2.9.7",
-    "jest": "22.0.4",
-    "awesome-typescript-loader": "3.4.1"
-  }
+    "name": "siema-react",
+    "version": "0.0.1",
+    "description": "React binding to lightweight slider library named Siema",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/aczekajski/siema-react.git"
+    },
+    "keywords": [
+        "react",
+        "siema",
+        "slider",
+        "carousel"
+    ],
+    "author": "arkadiusz.czekajski@x-kom.pl",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/aczekajski/siema-react/issues"
+    },
+    "homepage": "https://github.com/aczekajski/siema-react#readme",
+    "dependencies": {
+        "react": "^16.2.0",
+        "react-dom": "^16.2.0",
+        "siema": "^1.4.9"
+    },
+    "devDependencies": {
+        "@types/react": "^16.0.34",
+        "@types/react-dom": "^16.0.3",
+        "@types/siema": "^1.4.2",
+        "awesome-typescript-loader": "3.4.1",
+        "jest": "22.0.4",
+        "ts-jest": "21.2.4",
+        "ts-node": "^4.0.2",
+        "tslint": "5.8.0",
+        "html-webpack-plugin": "2.30.1",
+        "tslint-consistent-codestyle": "1.11.0",
+        "tslint-eslint-rules": "4.1.1",
+        "tslint-immutable": "4.5.0",
+        "tslint-microsoft-contrib": "5.0.1",
+        "tslint-react": "3.2.0",
+        "typescript": "^2.6.2",
+        "webpack": "3.10.0",
+        "webpack-dev-server": "2.9.7",
+        "webpack-hot-middleware": "2.21.0",
+        "url-loader": "0.6.2"
+    }
 }
