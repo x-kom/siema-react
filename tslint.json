@@ -1,0 +1,279 @@
+{
+   //TODO: tymczasowe do czasu rozwiązania: https://github.com/palantir/tslint/issues/2569
+   // nie działa chwilowo przestawione w settings.json dla vscode alwaysShowRuleFailuresAsWarnings
+   "defaultSeverity": "warn",
+   "rulesDirectory": "tslint-microsoft-contrib",
+   "extends": [
+      "tslint:recommended",
+      "tslint-react",
+      "tslint-consistent-codestyle",
+      "tslint-eslint-rules",
+      "tslint-immutable"
+   ],
+   "rules": {
+      // ################## KILL IT WITH FIRE FROM ABOVE ##################
+      "no-submodule-imports": false, // to wyłącza zakaz robienia "import ... from 'biblioteka/podfolder';"
+      "interface-name": false,
+      "max-line-length": false, //eslint
+      "member-ordering": false, //howto
+      "jsx-no-multiline-js": false,
+      "object-literal-sort-keys": false,
+      "no-switch-case-fall-through": false,
+      "prefer-template": false,
+      "prefer-method-signature": false,
+      "one-variable-per-declaration": false,
+      "ordered-imports": false,
+      // ################## PRZETESTOWANE ##################
+      "arrow-return-shorthand": [
+         true,
+         "multiline"
+      ],
+      "member-access": false,
+      "no-empty-interface": true,
+      "no-import-side-effect": [
+         true
+      ],
+      "no-invalid-this": [
+         true,
+         "check-function-in-method"
+      ],
+      "no-this-assignment": [
+         true,
+         {
+            "allow-destructuring": true
+         }
+      ],
+      "no-mixed-interface": false, // przemyslec
+      "no-unused-variable": true,
+      "object-literal-shorthand": true,
+      "only-arrow-functions": true,
+      "variable-name": [
+         true,
+         "ban-keywords",
+         "check-format",
+         "allow-leading-underscore",
+         "allow-pascal-case"
+      ],
+      "trailing-comma": [
+         false,
+         {
+            "multiline": {
+               "objects": "always",
+               "arrays": "always",
+               "functions": "never",
+               "typeLiterals": "ignore"
+            },
+            "esSpecCompliant": true
+         }
+      ],
+      "indent": [
+         true,
+         "spaces"
+      ],
+      "jsx-alignment": [
+         true
+      ],
+      "arrow-parens": true,
+      "no-trailing-whitespace": true,
+      "no-require-imports": true,
+      "triple-equals": true,
+      "no-shadowed-variable": true,
+      "typedef": [
+         true,
+         "property-declaration"
+         // "parameter", // ??? undecided yet
+         // "member-variable-declaration"
+         // "arrow-parameter" // ??? undecided yet
+      ],
+      "semicolon": [
+         true,
+         "always"
+      ],
+      "quotemark": [
+         true,
+         "single",
+         "jsx-double",
+         "avoid-template"
+      ],
+      "comment-format": [
+         true,
+         "check-space"
+      ],
+      "interface-over-type-literal": true,
+
+      // ################## whitespace and align ##################
+      "align": [
+         true,
+         "parameters",
+         "members",
+         "statements",
+         "elements"
+      ],
+      "curly": true,
+      "encoding": true,
+      "eofline": true,
+      "import-spacing": true,
+      "no-consecutive-blank-lines": true,
+      "no-empty-line-after-opening-brace": false,
+      "no-irregular-whitespace": true,
+      "object-literal-key-quotes": [
+         true,
+         "as-needed"
+      ],
+      "one-line": [
+         true,
+         "check-open-brace",
+         "check-catch",
+         "check-else",
+         "check-whitespace"
+      ],
+      "space-within-parens": true,
+      "typedef-whitespace": false,
+      "whitespace": [
+         true,
+         "check-branch",
+         "check-decl",
+         "check-operator",
+         "check-separator",
+         "check-type"
+      ],
+      // "no-else-after-return": true,
+      "cyclomatic-complexity": true,
+      "deprecation": true, // deprecated APIs are sometimes unavoidable
+      "no-angle-bracket-type-assertion": true, // pick either type-cast format and use it consistently
+      "prefer-conditional-expression": true, // unnecessarily strict
+      "return-undefined": true, // this actually affect the readability of the code
+      // "mocha-no-side-effect-code": true, // TODO: wacek
+      "number-literal-format": true,
+      "forin": true,
+      "no-for-in-array": true,
+      "type-literal-delimiter": true,
+      "switch-default": true,
+      "no-parameter-reassignment": true,
+      "use-default-type-parameter": true,
+      "no-object-literal-type-assertion": true,
+      // ################## do sprawdzenia w ESLINT i innych PLUGINACH ##################
+      // "max-len": true,
+      // HOWTO:
+      // member-ordering - render na końcu
+      // aria rules https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/recommended_ruleset.js
+      // no-suspicious-comment na release
+      // "import-name": true - pilnowanie nazw importów
+      // "export-name" ..... chujowo działało
+      // "match-default-export-name": true,
+      // ################## above is eslint and check
+      // "no-implicit-dependencies": true, // TODO: doczytac i pomyslec
+      // "no-typeof-undefined": true // może kiedyś
+      // "restrict-plus-operands": true // może kiedyś
+      // ################## SECURITY ##################
+      /**
+      * Security Rules. The following rules should be turned on because they find security issues
+      * or are recommended in the Microsoft Secure Development Lifecycle (SDL)
+      */
+      "insecure-random": true,
+      "no-banned-terms": true,
+      "no-cookies": true,
+      "no-document-write": true,
+      "no-eval": true,
+      // "no-http-string": [
+      //    true,
+      //    "http://www.example.com/?.*",
+      //    "http://www.examples.com/?.*"
+      // ],
+      "possible-timing-attack": true,
+      "react-anchor-blank-noopener": true,
+      "react-iframe-missing-sandbox": true,
+      "react-no-dangerous-html": true,
+      "react-this-binding-issue": true,
+      "react-unused-props-and-state": true,
+      // #########################################################################################
+      // Everything bellow is unchecked
+      // #########################################################################################
+      "await-promise": true,
+      "jquery-deferred-must-complete": true,
+      "label-position": true,
+      "mocha-avoid-only": true,
+      "no-arg": true,
+      "no-backbone-get-set-outside-model": true,
+      "no-bitwise": true,
+      "no-conditional-assignment": true,
+      "no-control-regex": true,
+      "no-debugger": true,
+      "no-duplicate-case": true,
+      "no-duplicate-super": true,
+      "no-duplicate-switch-case": true,
+      "no-duplicate-variable": true,
+      "no-empty": true,
+      "no-floating-promises": true,
+      "no-invalid-regexp": true,
+      "no-invalid-template-strings": true,
+      "no-jquery-raw-elements": true,
+      "no-misused-new": true,
+      "no-non-null-assertion": true,
+      "no-reference-import": true,
+      "no-regex-spaces": true,
+      "no-sparse-arrays": true,
+      "no-string-literal": true,
+      "no-string-throw": true,
+      "no-unnecessary-bind": true,
+      "no-unnecessary-callback-wrapper": true,
+      "no-unnecessary-initializer": true,
+      "no-unnecessary-override": true,
+      "no-unsafe-finally": true,
+      "no-unused-expression": true,
+      "no-with-statement": true,
+      "promise-function-async": true,
+      "promise-must-complete": true,
+      "radix": true,
+      "use-isnan": true,
+      "use-named-parameter": true,
+      "valid-typeof": true,
+      "adjacent-overload-signatures": true,
+      "ban-comma-operator": true, // possibly controversial
+      "binary-expression-operand-order": true,
+      "callable-types": true,
+      "chai-prefer-contains-to-index-of": true,
+      "chai-vague-errors": true,
+      "class-name": true,
+      "function-name": true,
+      "jsdoc-format": true,
+      "max-classes-per-file": [
+         true,
+         3
+      ], // we generally recommend making one public class per file
+      "max-file-line-count": true,
+      "max-func-body-length": [
+         true,
+         100,
+         {
+            "ignore-parameters-to-function-regex": "describe"
+         }
+      ],
+      "mocha-unneeded-done": true,
+      "new-parens": true,
+      "no-construct": true,
+      "no-duplicate-imports": true,
+      "no-function-expression": true,
+      "no-inferrable-types": false, // turn no-inferrable-types off in order to make the code consistent in its use of type decorations
+      "no-multiline-string": true, // multiline-strings often introduce unnecessary whitespace into the string literals
+      "no-null-keyword": false, // turn no-null-keyword off and use undefined to mean not initialized and null to mean without a value
+      "no-parameter-properties": true,
+      "no-redundant-jsdoc": true,
+      "no-return-await": true,
+      "no-unnecessary-class": true,
+      "no-unnecessary-field-initialization": true,
+      "no-unnecessary-local-variable": true,
+      "no-unnecessary-qualifier": true,
+      "no-unnecessary-type-assertion": true,
+      "no-unsupported-browser-code": true,
+      "no-useless-files": true,
+      "no-var-keyword": true,
+      "no-var-requires": true,
+      "no-var-self": true,
+      "prefer-const": true,
+      "prefer-for-of": true,
+      "prefer-object-spread": true,
+      "underscore-consistent-invocation": true,
+      "unified-signatures": true
+   }
+}
