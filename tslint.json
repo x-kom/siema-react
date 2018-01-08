@@ -12,10 +12,10 @@
     ],
     "rules": {
         // ################## KILL IT WITH FIRE FROM ABOVE ##################
-        "no-submodule-imports": false, // to wyłącza zakaz robienia "import ... from 'biblioteka/podfolder';"
+        "no-submodule-imports": false,
         "interface-name": false,
-        "max-line-length": false, //eslint
-        "member-ordering": false, //howto
+        "max-line-length": false,
+        "member-ordering": false,
         "jsx-no-multiline-js": false,
         "object-literal-sort-keys": false,
         "no-switch-case-fall-through": false,
@@ -43,7 +43,6 @@
                 "allow-destructuring": true
             }
         ],
-        "no-mixed-interface": false, // przemyslec
         "no-unused-variable": true,
         "object-literal-shorthand": true,
         "only-arrow-functions": true,
@@ -81,9 +80,6 @@
         "typedef": [
             true,
             "property-declaration"
-            // "parameter", // ??? undecided yet
-            // "member-variable-declaration"
-            // "arrow-parameter" // ??? undecided yet
         ],
         "semicolon": [
             true,
@@ -142,7 +138,6 @@
         "no-angle-bracket-type-assertion": true, // pick either type-cast format and use it consistently
         "prefer-conditional-expression": true, // unnecessarily strict
         "return-undefined": true, // this actually affect the readability of the code
-        // "mocha-no-side-effect-code": true, // TODO: wacek
         "number-literal-format": true,
         "forin": true,
         "no-for-in-array": true,
@@ -151,19 +146,6 @@
         "no-parameter-reassignment": true,
         "use-default-type-parameter": true,
         "no-object-literal-type-assertion": true,
-        // ################## do sprawdzenia w ESLINT i innych PLUGINACH ##################
-        // "max-len": true,
-        // HOWTO:
-        // member-ordering - render na końcu
-        // aria rules https://github.com/Microsoft/tslint-microsoft-contrib/blob/master/recommended_ruleset.js
-        // no-suspicious-comment na release
-        // "import-name": true - pilnowanie nazw importów
-        // "export-name" ..... chujowo działało
-        // "match-default-export-name": true,
-        // ################## above is eslint and check
-        // "no-implicit-dependencies": true, // TODO: doczytac i pomyslec
-        // "no-typeof-undefined": true // może kiedyś
-        // "restrict-plus-operands": true // może kiedyś
         // ################## SECURITY ##################
         /**
       * Security Rules. The following rules should be turned on because they find security issues
@@ -174,11 +156,6 @@
         "no-cookies": true,
         "no-document-write": true,
         "no-eval": true,
-        // "no-http-string": [
-        //    true,
-        //    "http://www.example.com/?.*",
-        //    "http://www.examples.com/?.*"
-        // ],
         "possible-timing-attack": true,
         "react-anchor-blank-noopener": true,
         "react-iframe-missing-sandbox": true,
@@ -254,7 +231,6 @@
         "no-duplicate-imports": true,
         "no-function-expression": true,
         "no-inferrable-types": false, // turn no-inferrable-types off in order to make the code consistent in its use of type decorations
-        "no-multiline-string": true, // multiline-strings often introduce unnecessary whitespace into the string literals
         "no-null-keyword": false, // turn no-null-keyword off and use undefined to mean not initialized and null to mean without a value
         "no-parameter-properties": true,
         "no-redundant-jsdoc": true,
