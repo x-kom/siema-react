@@ -67,11 +67,9 @@ class Siema extends React.Component<SiemaProps & SiemaReactProps> {
                         : child;
                 return React.cloneElement(childNode, {
                     onClick: (e) => {
-                        e.persist();
                         if (typeof childNode.props.onClick === 'function') {
                             childNode.props.onClick(e);
                         }
-                        console.log('klik!', index, e, e.nativeEvent);
                         this.goTo(index);
                     }
                 });

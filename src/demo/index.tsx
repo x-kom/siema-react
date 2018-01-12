@@ -70,15 +70,15 @@ class App extends React.Component {
             <div>
                 No siema ;)
                 <BigSlider>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                    <div onClick={() => { console.log('to jest taki nowy handler'); }}><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
+                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
                 </BigSlider>
                 <SmallSliderWrapper>
                     <SmallSlider overflowHidden={false}>
