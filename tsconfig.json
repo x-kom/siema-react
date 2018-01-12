@@ -18,6 +18,7 @@
         // przy okazji wdrożeń zastanowić się
         // "importHelpers": true, // importing helper functions from tslib
         // "noEmitHelpers": true, // disable emitting inline helper function
+        "noErrorTruncation": true,
         "lib": [
             "es6",
             "dom"

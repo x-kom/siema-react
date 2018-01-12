@@ -36,7 +36,7 @@ const config = {
                 ],
                 test: /\.tsx?$/,
             },
-            { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader', exclude: [/node_modules/] },
+            { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader', exclude: [/node_modules/, /siema\.min/] },
             { test: /\.json$/, loader: 'json-loader' },
             { test: /\.png$/, loader: 'url-loader?limit=1000' },
         ],
