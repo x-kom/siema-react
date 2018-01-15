@@ -2,7 +2,7 @@
     "name": "siema-react",
     "version": "0.0.1",
     "description": "React binding to lightweight slider library named Siema",
-    "main": "index.js",
+    "main": "src/lib/index.ts",
     "scripts": {
         "open:src": "webpack-dev-server --colors --open --config webpack/dev.ts",
         "start": "npm run open:src",
