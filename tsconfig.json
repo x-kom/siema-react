@@ -2,14 +2,18 @@
     "compilerOptions": {
         "rootDir": "./",
         "baseUrl": "./src",
+        "outDir": "./dist",
+        "module": "es2015",
         "moduleResolution": "node",
-        "target": "es2015",
+        "declaration": true,
+        // "moduleResolution": "node",
+        "target": "es2016",
         "jsx": "react",
         "pretty": true,
         "experimentalDecorators": true,
         "sourceMap": true,
         "skipDefaultLibCheck": true,
-        "allowSyntheticDefaultImports": true,
+        // "allowSyntheticDefaultImports": true,
         "noUnusedLocals": true,
         // "noImplicitAny": true, // chcemy, ale generuje dużo błędów na obecnym kodzie
         // "noImplicitReturns": true, // chyba chcemy (nie mamy pewności), rzuca na obecnym kodzie tylko kilka błędów
@@ -52,5 +56,10 @@
         "bin",
         "node_modules",
         "coverage"
+    ],
+    "include": [
+        "./src/lib/*.tsx",
+        // "./src/lib/*.ts",
+        "./tools/*.d.ts"
     ]
 }

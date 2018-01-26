@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import SiemaBase, { SiemaOptions } from 'siema';
 
-type SiemaProps = Overwrite<Omit<SiemaOptions, 'selector'>, {
+export type SiemaProps = Overwrite<Omit<SiemaOptions, 'selector'>, {
     onChange?: (index: number) => void;
 }>;
 
-interface SiemaReactProps {
+export interface SiemaReactProps {
     clickable?: boolean;
     children: React.ReactNode[];
     className?: string;

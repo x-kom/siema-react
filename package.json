@@ -2,11 +2,13 @@
     "name": "siema-react",
     "version": "0.0.1",
     "description": "React binding to lightweight slider library named Siema",
-    "main": "src/lib/index.ts",
+    "main": "main.js",
+    "types": "./dist/src/lib/react-siema.d.ts",
     "scripts": {
         "open:src": "webpack-dev-server --colors --open --config webpack/dev.ts",
         "start": "npm run open:src",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc"
     },
     "repository": {
         "type": "git",
@@ -52,5 +54,10 @@
         "webpack": "3.10.0",
         "webpack-dev-server": "2.9.7",
         "webpack-hot-middleware": "2.21.0"
-    }
+    },
+    "files": [
+      "dist",
+      "LICENSE",
+      "main.js"
+    ]
 }
