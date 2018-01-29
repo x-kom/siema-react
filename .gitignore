@@ -17,3 +17,6 @@ node_modules/
 .vscode/launch.json
 
 .jest-cache/
+
+dist/
+tsc/

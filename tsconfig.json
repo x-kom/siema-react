@@ -2,8 +2,8 @@
     "compilerOptions": {
         "rootDir": "./",
         "baseUrl": "./src",
-        "outDir": "./dist",
-        "module": "es2015",
+        "outDir": "./tsc",
+        "module": "es6",
         "moduleResolution": "node",
         "declaration": true,
         // "moduleResolution": "node",
@@ -59,7 +59,6 @@
     ],
     "include": [
         "./src/lib/*.tsx",
-        // "./src/lib/*.ts",
-        "./tools/*.d.ts"
+        "./src/lib/*d.ts"
     ]
 }

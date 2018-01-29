@@ -4,10 +4,9 @@
 //                 Pavel Puchkov <https://github.com/0x6368656174>
 //                 Sam Nau <https://github.com/samnau>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-type Diff<T extends string, U extends string> = ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T];
-type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
-type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
+ type Diff<T extends string, U extends string> = ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T];
+ type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
+ type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
 
 declare module 'siema' {
     export default class Siema {

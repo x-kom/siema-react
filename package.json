@@ -2,13 +2,15 @@
     "name": "siema-react",
     "version": "0.0.1",
     "description": "React binding to lightweight slider library named Siema",
-    "main": "main.js",
-    "types": "./dist/src/lib/react-siema.d.ts",
+    "main": "dist/react-siema.js",
+    "types": ["./tsc/src/lib/react-siema.d.ts", "./tools/index.d.ts"],
     "scripts": {
         "open:src": "webpack-dev-server --colors --open --config webpack/dev.ts",
         "start": "npm run open:src",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "tsc"
+        "prebuild": "tsc",
+        "build": "./node_modules/.bin/babel ./tsc/src/lib --presets babel-preset-es2015 --out-dir ./dist && npm pack",
+        "publish": "npm publish"
     },
     "repository": {
         "type": "git",
@@ -37,6 +39,8 @@
         "@types/react-dom": "^16.0.3",
         "@types/webpack-env": "^1.13.3",
         "awesome-typescript-loader": "3.4.1",
+        "babel-cli": "^6.26.0",
+        "babel-preset-es2015": "^6.24.1",
         "html-webpack-plugin": "2.30.1",
         "jest": "22.0.4",
         "react-hot-loader": "3.0.0-beta.7",
@@ -56,8 +60,8 @@
         "webpack-hot-middleware": "2.21.0"
     },
     "files": [
-      "dist",
-      "LICENSE",
-      "main.js"
+        "dist",
+        "tsc/src/lib/react-siema.d.ts",
+        "tools/index.d.ts"
     ]
 }
