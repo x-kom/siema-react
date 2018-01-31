@@ -58,8 +58,15 @@ class Siema extends React.Component<SiemaProps & SiemaReactProps> {
             onChange: () => onChange(this.siemaInstance.currentSlide),
         };
 
+        this.slides = this.addClickEventForClickable(this.props.children, clickable);
+    }
+
+    private getSiemaWrapperRef = (element) => { this.siemaWrapper = element; };
+
+    private addClickEventForClickable = (children, clickable) => {
         if (clickable) {
-            this.slides = React.Children.map(this.props.children, (child, index) => {
+            this.options.preventClickOnDrag = true;
+            return React.Children.map(children, (child, index) => {
                 let childNode: React.ReactElement<any>;
                 childNode =
                     (typeof child === 'string' || typeof child === 'number' || typeof child.type === 'undefined')
@@ -74,13 +81,14 @@ class Siema extends React.Component<SiemaProps & SiemaReactProps> {
                     }
                 });
             });
-            this.options.preventClickOnDrag = true;
         } else {
-            this.slides = this.props.children;
+            return children;
         }
     }
 
-    private getSiemaWrapperRef = (element) => { this.siemaWrapper = element; };
+    public componentWillReceiveProps(nextProps) {
+        this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
+    }
 
     public componentDidMount() {
         this.options.selector = this.siemaWrapper;

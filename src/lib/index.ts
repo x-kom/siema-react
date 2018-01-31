@@ -1,3 +1,3 @@
-import Siema from './react-siema';
+import Siema from './siema-react';
 
 export default Siema;
