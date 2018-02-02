@@ -34,7 +34,7 @@
     "dependencies": {
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "siema": "x-kom/siema#e9a0e39"
+        "siema": "x-kom/siema#19c885d85f0dcec7854eac2b0bf6938106f6c2ac"
     },
     "devDependencies": {
         "@types/jest": "^22.0.1",
