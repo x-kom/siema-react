@@ -15,11 +15,7 @@
         "skipDefaultLibCheck": true,
         // "allowSyntheticDefaultImports": true,
         "noUnusedLocals": true,
-        // "noImplicitAny": true, // chcemy, ale generuje dużo błędów na obecnym kodzie
-        // "noImplicitReturns": true, // chyba chcemy (nie mamy pewności), rzuca na obecnym kodzie tylko kilka błędów
         "noImplicitThis": true,
-        // "strictNullChecks": true, // - wymaga sporo poprawek i przerobek dla actiontypes patrz telegram ze sobą  plik constants.ts
-        // przy okazji wdrożeń zastanowić się
         // "importHelpers": true, // importing helper functions from tslib
         // "noEmitHelpers": true, // disable emitting inline helper function
         "noErrorTruncation": true,
@@ -33,23 +29,11 @@
             "webpack-env",
             "node",
             "jest"
-            //"aspnet-webpack-react"
         ],
         "paths": {
             "~/*": [
                 "./*"
             ]
-            // Fix "Duplicate identifier" errors caused by multiple dependencies fetching their own copies of type definitions.
-            // We tell TypeScript which type definitions module to treat as the canonical one (instead of combining all of them).
-            // "history": [
-            //   "./node_modules/@types/history/index"
-            // ],
-            // "redux": [
-            //   "./node_modules/@types/redux/index"
-            // ],
-            // "react": [
-            //   "./node_modules/@types/react/index"
-            // ]
         }
     },
     "exclude": [
