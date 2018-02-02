@@ -3,7 +3,10 @@
     "version": "0.0.1",
     "description": "React binding to lightweight slider library named Siema",
     "main": "dist/siema-react.js",
-    "types": ["./tsc/src/lib/siema-react.d.ts", "./src/lib/siema.d.ts"],
+    "types": [
+        "./tsc/src/lib/siema-react.d.ts",
+        "./src/lib/siema.d.ts"
+    ],
     "scripts": {
         "open:src": "webpack-dev-server --colors --open --config webpack/dev.ts",
         "start": "npm run open:src",
@@ -31,7 +34,7 @@
     "dependencies": {
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "siema": "x-kom/siema#e9a0e39"
+        "siema": "x-kom/siema#19c885d85f0dcec7854eac2b0bf6938106f6c2ac"
     },
     "devDependencies": {
         "@types/jest": "^22.0.1",
