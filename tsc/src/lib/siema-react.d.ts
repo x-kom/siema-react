@@ -9,15 +9,14 @@ export declare type Diff<T extends string, U extends string> = ({
 })[T];
 export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export declare type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
-export declare type SiemaProps = Overwrite<Omit<SiemaOptions, 'selector'>, {
+export declare type SiemaReactProps = Overwrite<Omit<SiemaOptions, 'selector'>, {
     onChange?: (index: number) => void;
-}>;
-export interface SiemaReactProps {
+}> & {
     clickable?: boolean;
-    children: React.ReactNode[];
+    children?: React.ReactNode[];
     className?: string;
-}
-declare class Siema extends React.Component<SiemaProps & SiemaReactProps> {
+};
+declare class Siema extends React.Component<SiemaReactProps> {
     private siemaWrapper;
     private siemaInstance;
     private slides;
@@ -25,7 +24,7 @@ declare class Siema extends React.Component<SiemaProps & SiemaReactProps> {
     prev: SiemaBase['prev'];
     next: SiemaBase['next'];
     goTo: SiemaBase['goTo'];
-    constructor(props: SiemaProps & SiemaReactProps);
+    constructor(props: SiemaReactProps);
     private getSiemaWrapperRef;
     private addClickEventForClickable;
     componentWillReceiveProps(nextProps: any): void;
