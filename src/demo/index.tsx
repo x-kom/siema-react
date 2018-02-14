@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import Siema from '~/lib/react-siema';
+import Siema from '../lib/siema-react';
 import styled from 'styled-components';
 
 const BigSlider = styled(Siema) `
@@ -58,6 +58,7 @@ const SmallSliderWrapper = styled.div`
 `;
 
 class App extends React.Component {
+
     private getSmallSliderRef = (element) => { this.smallSlider = element; };
     private getBigSliderRef = (element) => { this.bigSlider = element; };
 
