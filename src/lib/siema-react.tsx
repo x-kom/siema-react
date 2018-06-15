@@ -66,7 +66,7 @@ class Siema extends React.Component<SiemaReactProps> {
 
     private getSiemaWrapperRef = (element) => { this.siemaWrapper = element; };
 
-    private addClickEventForClickable = (children, clickable) => {
+    private addClickEventForClickable = (children, clickable: boolean) => {
         if (clickable) {
             this.options.preventClickOnDrag = true;
             return React.Children.map(children, (child, index) => {
@@ -89,7 +89,7 @@ class Siema extends React.Component<SiemaReactProps> {
         }
     }
 
-    public componentWillReceiveProps(nextProps) {
+    public componentWillReceiveProps(nextProps: SiemaReactProps) {
         this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
     }
 
