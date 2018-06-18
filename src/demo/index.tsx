@@ -57,7 +57,22 @@ const SmallSliderWrapper = styled.div`
     }
 `;
 
-class App extends React.Component {
+class App extends React.Component<{}, { slides: number; images: string[] }> {
+
+    state = {
+        slides: 5,
+        images: [
+            'http://via.placeholder.com/350x150/FFC0CB?text=1',
+            'http://via.placeholder.com/350x150/ADD8E6?text=2',
+            'http://via.placeholder.com/350x150/FFC0CB?text=3',
+            'http://via.placeholder.com/350x150/ADD8E6?text=4',
+            'http://via.placeholder.com/350x150/FFC0CB?text=5',
+            'http://via.placeholder.com/350x150/ADD8E6?text=6',
+            'http://via.placeholder.com/350x150/FFC0CB?text=7',
+            'http://via.placeholder.com/350x150/ADD8E6?text=8',
+            'http://via.placeholder.com/350x150/FFC0CB?text=9',
+        ],
+    };
 
     private getSmallSliderRef = (element) => { this.smallSlider = element; };
     private getBigSliderRef = (element) => { this.bigSlider = element; };
@@ -65,22 +80,41 @@ class App extends React.Component {
     private smallSlider;
     private bigSlider;
 
+    moreSlides = () => {
+        this.changeNumberOfSlides(1);
+    }
+
+    lessSlides = () => {
+        this.changeNumberOfSlides(-1);
+    }
+
+    changeNumberOfSlides = (diff) => {
+        this.setState((state) => ({ slides: Math.max(Math.min(state.slides + diff, state.images.length), 1) }));
+    }
+
+    shuffleSlides = () => {
+        const newImages = [];
+        const oldImages = this.state.images.slice();
+        while (oldImages.length) {
+            const index = Math.round(Math.random() * (oldImages.length - 1));
+            newImages.push(oldImages[index]);
+            oldImages.splice(index, 1);
+        }
+        this.setState((state) => ({ images: newImages }));
+    }
+
     render() {
 
         return (
             <div>
-                No siema ;)
+                <button onClick={this.moreSlides}>more slides</button>
+                <button onClick={this.lessSlides}>less slides</button>
+                <button onClick={this.shuffleSlides}>shuffle slides</button>
                 <BigSlider>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                    {this.state.images.slice(0, this.state.slides).map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>
+                <hr />
+                Multiple visible slides
                 <SmallSliderWrapper>
                     <SmallSlider overflowHidden={false}>
                         <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
