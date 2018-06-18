@@ -80,15 +80,23 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
     private smallSlider;
     private bigSlider;
 
-    changeNumberOfSlides = () => {
-        this.setState((state) => ({ slides: state.slides + 1 }));
+    moreSlides = () => {
+        this.changeNumberOfSlides(1);
+    }
+
+    lessSlides = () => {
+        this.changeNumberOfSlides(-1);
+    }
+
+    changeNumberOfSlides = (diff) => {
+        this.setState((state) => ({ slides: Math.max(Math.min(state.slides + diff, state.images.length), 1) }));
     }
 
     shuffleSlides = () => {
         const newImages = [];
         const oldImages = this.state.images.slice();
         while (oldImages.length) {
-            const index = Math.random() * (oldImages.length - 1);
+            const index = Math.round(Math.random() * (oldImages.length - 1));
             newImages.push(oldImages[index]);
             oldImages.splice(index, 1);
         }
@@ -99,10 +107,14 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
 
         return (
             <div>
-                No siema ;) <button onClick={this.changeNumberOfSlides}>change number of slides</button> <button onClick={this.shuffleSlides}>shuffle slides</button>
+                <button onClick={this.moreSlides}>more slides</button>
+                <button onClick={this.lessSlides}>less slides</button>
+                <button onClick={this.shuffleSlides}>shuffle slides</button>
                 <BigSlider>
-                    {this.state.images.slice(0, (this.state.slides % this.state.images.length) || 1).map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
+                    {this.state.images.slice(0, this.state.slides).map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>
+                <hr />
+                Multiple visible slides
                 <SmallSliderWrapper>
                     <SmallSlider overflowHidden={false}>
                         <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
