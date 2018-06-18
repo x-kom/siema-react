@@ -20,6 +20,7 @@ declare class Siema extends React.Component<SiemaReactProps> {
     private siemaWrapper;
     private siemaInstance;
     private slides;
+    private portal;
     private options;
     prev: SiemaBase['prev'];
     next: SiemaBase['next'];
@@ -27,8 +28,9 @@ declare class Siema extends React.Component<SiemaReactProps> {
     constructor(props: SiemaReactProps);
     private getSiemaWrapperRef;
     private addClickEventForClickable;
-    componentWillReceiveProps(nextProps: any): void;
+    componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
+    componentDidUpdate(): void;
     render(): JSX.Element;
 }
 export default Siema;
