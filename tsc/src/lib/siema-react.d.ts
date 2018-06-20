@@ -20,7 +20,7 @@ declare class Siema extends React.Component<SiemaReactProps> {
     private siemaWrapper;
     private siemaInstance;
     private slides;
-    private portal;
+    private portals;
     private options;
     prev: SiemaBase['prev'];
     next: SiemaBase['next'];
@@ -30,7 +30,8 @@ declare class Siema extends React.Component<SiemaReactProps> {
     private addClickEventForClickable;
     componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
-    componentDidUpdate(): void;
+    wrapSlide: (slide: any, key: any) => JSX.Element;
+    renderIntoPortal: (slide: any, i: any) => React.ReactPortal;
     render(): JSX.Element;
 }
 export default Siema;

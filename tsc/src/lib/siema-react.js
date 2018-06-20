@@ -2,9 +2,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import SiemaBase from 'siema';
 class SiemaWrapper extends React.Component {
-    // since all further children updates will be handled in "componentDidUpdate" of the main Siema component
-    // we render this wrapper only once instead of inserting the children in "componentDidMount"
-    // it will make the component SSR-compatible
+    // since all further children updates will be handled in "componentWillReceiveProps" of the main Siema component
+    // we render this wrapper only once at the beginning for the slides to be visible in SSR output and for proper `hydrate` after that
     shouldComponentUpdate() {
         return false;
     }
@@ -15,6 +14,7 @@ class SiemaWrapper extends React.Component {
 class Siema extends React.Component {
     constructor(props) {
         super(props);
+        this.portals = [];
         this.prev = (...args) => { this.siemaInstance.prev(...args); };
         this.next = (...args) => { this.siemaInstance.next(...args); };
         this.goTo = (...args) => { this.siemaInstance.goTo(...args); }; // TODO: improve types
@@ -42,6 +42,8 @@ class Siema extends React.Component {
                 return children;
             }
         };
+        this.wrapSlide = (slide, key) => React.createElement("div", { key: key }, slide);
+        this.renderIntoPortal = (slide, i) => ReactDOM.createPortal(slide, this.portals[i]);
         const { 
         // options
         duration = 200, easing = 'ease-out', perPage = 1, startIndex = 0, draggable = true, multipleDrag = true, threshold = 20, loop = false, overflowHidden = true, preventClickOnDrag = false, onInit = () => undefined, onChange = () => undefined, 
@@ -63,48 +65,41 @@ class Siema extends React.Component {
             onChange: () => onChange(this.siemaInstance.currentSlide),
         };
         this.slides = this.addClickEventForClickable(this.props.children, clickable);
-        if (document && document.createElement) {
-            this.portal = document.createElement('div');
-        }
     }
     componentWillReceiveProps(nextProps) {
         this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
+        if (this.siemaInstance) {
+            const oldSlidesNumber = this.siemaWrapper.children[0].children.length;
+            const newSlidesNumber = this.slides.length;
+            if (newSlidesNumber > oldSlidesNumber) {
+                for (let i = oldSlidesNumber; i < newSlidesNumber; ++i) {
+                    this.siemaInstance.append(document.createElement('div'));
+                }
+            }
+            else if (newSlidesNumber < oldSlidesNumber) {
+                for (let i = oldSlidesNumber - 1; i >= newSlidesNumber; --i) {
+                    this.siemaInstance.remove(i);
+                }
+            }
+            for (let i = 0; i < this.slides.length; ++i) {
+                if (!this.portals[i]) {
+                    const slideWrapper = this.siemaWrapper.children[0].children[i].children[0];
+                    if (slideWrapper.children.length > 0) {
+                        slideWrapper.removeChild(slideWrapper.children[0]);
+                    }
+                }
+                this.portals[i] = this.siemaWrapper.children[0].children[i].children[0];
+            }
+        }
     }
     componentDidMount() {
         this.options.selector = this.siemaWrapper;
         this.siemaInstance = new SiemaBase(this.options);
-        window.SIEMA = this.siemaInstance;
-    }
-    componentDidUpdate() {
-        const newSlides = this.portal.children;
-        const oldSlides = this.siemaWrapper.children[0].children;
-        const currentSlide = this.siemaInstance.currentSlide;
-        // first, let's get rid of excessive slides
-        const excessiveSlides = oldSlides.length - newSlides.length;
-        for (let i = 0; i < excessiveSlides; ++i) {
-            this.siemaInstance.remove(oldSlides.length - 1);
-        }
-        // now we can replace old slides with a new ones
-        for (let i = 0; i < newSlides.length; ++i) {
-            const newSlide = newSlides[i].cloneNode(true);
-            const oldSlide = oldSlides[i];
-            if (oldSlide) {
-                this.siemaInstance.remove(i);
-                this.siemaInstance.insert(newSlide, i);
-                // TODO: think about a method to replace only when props actually did changed (if it's possible at all..?)
-                // I wish there wes a "replace" method in Siema...
-            }
-            else {
-                this.siemaInstance.append(newSlide);
-            }
-        }
-        // since "remove & insert" procedure can mess up current slide state, we restore the previous position (or the closest possible one)
-        this.siemaInstance.goTo(Math.min(currentSlide, newSlides.length));
     }
     render() {
         return (React.createElement(React.Fragment, null,
-            React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides),
-            this.portal && ReactDOM.createPortal(this.slides, this.portal)));
+            React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)),
+            this.slides.length > 0 && this.portals.length > 0 && this.slides.map(this.renderIntoPortal)));
     }
 }
 export default Siema;

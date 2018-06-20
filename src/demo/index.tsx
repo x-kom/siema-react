@@ -110,7 +110,7 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
                 <button onClick={this.moreSlides}>more slides</button>
                 <button onClick={this.lessSlides}>less slides</button>
                 <button onClick={this.shuffleSlides}>shuffle slides</button>
-                <BigSlider>
+                <BigSlider onChange={(index) => { console.log('onchange', index); }}>
                     {this.state.images.slice(0, this.state.slides).map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>
                 <hr />
