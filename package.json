@@ -1,6 +1,6 @@
 {
     "name": "siema-react",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "React binding to lightweight slider library named Siema",
     "main": "dist/siema-react.js",
     "types": "./tsc/src/lib/siema-react.d.ts",
@@ -33,7 +33,7 @@
         "@types/enzyme": "^3.1.8",
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "siema": "x-kom/siema#19c885d85f0dcec7854eac2b0bf6938106f6c2ac"
+        "siema": "x-kom/siema#ae3e6967fc4ea4cace2a31d75e88dce9c4139135"
     },
     "devDependencies": {
         "@types/jest": "^22.0.1",
