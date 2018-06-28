@@ -57,7 +57,20 @@ const SmallSliderWrapper = styled.div`
     }
 `;
 
-class App extends React.Component<{}, { slides: number; images: string[] }> {
+const FullWidthSlider = styled(Siema) `
+    width: 100%;
+`;
+
+const SingleSlide = styled.div`
+    border: 2px solid #666;
+    border-radius: 16px;
+    overflow: hidden;
+    line-height: 0;
+    width: 400px;
+    box-sizing: border-box;
+`;
+
+class App extends React.Component<{}, { slides: number; images: string[]; mounted: boolean }> {
 
     state = {
         slides: 5,
@@ -72,13 +85,22 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
             'http://via.placeholder.com/350x150/ADD8E6?text=8',
             'http://via.placeholder.com/350x150/FFC0CB?text=9',
         ],
+        mounted: true,
     };
 
     private getSmallSliderRef = (element) => { this.smallSlider = element; };
     private getBigSliderRef = (element) => { this.bigSlider = element; };
+    private getTripleSliderRef = (element) => { this.tripleSlider = element; };
+    private getAutoSliderRef = (element) => { this.autoSlider = element; };
 
     private smallSlider;
     private bigSlider;
+    private tripleSlider;
+    private autoSlider;
+
+    toggleMounted = () => {
+        this.setState((state) => ({ mounted: !state.mounted }));
+    }
 
     moreSlides = () => {
         this.changeNumberOfSlides(1);
@@ -111,7 +133,7 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
                 <button onClick={this.lessSlides}>less slides</button>
                 <button onClick={this.shuffleSlides}>shuffle slides</button>
                 <BigSlider onChange={(index) => { console.log('onchange', index); }}>
-                    {this.state.images.slice(0, this.state.slides).map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
+                    {this.state.images.slice(0, this.state.slides).map((src) => <SingleSlide key={src}><img src={src} alt="Siema image" /></SingleSlide>)}
                 </BigSlider>
                 <hr />
                 Multiple visible slides
@@ -128,7 +150,10 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
                         <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
                     </SmallSlider>
                 </SmallSliderWrapper>
-                <TripleSlider perPage={3} clickable={true} preventClickOnDrag={true}>
+                <hr />
+                <button onClick={() => { this.tripleSlider.prev(); }}>prev</button>
+                <button onClick={() => { this.tripleSlider.next(); }}>next</button>
+                <TripleSlider perPage={3} innerRef={this.getTripleSliderRef} clickable={true} preventClickOnDrag={true}>
                     <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
                     <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
                     <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
@@ -139,6 +164,22 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
                     <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
                     <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
                 </TripleSlider>
+                <hr style={{ clear: 'both' }} />
+                <button onClick={() => { this.autoSlider.prev(); }}>prev</button>
+                <button onClick={() => { this.autoSlider.next(); }}>next</button>
+                <div style={{ maxWidth: '1522px', border: '2px solid red' }}>
+                    <FullWidthSlider perPage={0} innerRef={this.getAutoSliderRef} mode={'centerFit'} clickable={true} preventClickOnDrag={true}>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></SingleSlide>
+                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></SingleSlide>
+                    </FullWidthSlider>
+                </div>
                 <hr style={{ clear: 'both' }} />
                 <button onClick={() => { this.bigSlider.prev(); }}>prev</button>
                 <button onClick={() => { this.bigSlider.next(); }}>next</button>
@@ -166,6 +207,11 @@ class App extends React.Component<{}, { slides: number; images: string[] }> {
                         <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
                     </SmallSlider>
                 </SmallSliderWrapper>
+                <hr />
+                Unmounting example <button onClick={this.toggleMounted}>mount/unmount</button>
+                {this.state.mounted && <BigSlider>
+                    {this.state.images.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
+                </BigSlider>}
             </div>
         );
     }
