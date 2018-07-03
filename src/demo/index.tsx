@@ -66,7 +66,7 @@ const SingleSlide = styled.div`
     border-radius: 16px;
     overflow: hidden;
     line-height: 0;
-    width: 400px;
+    width: ${({ fullWidth = false }: { fullWidth?: boolean }) => fullWidth ? '100%' : '400px'};
     box-sizing: border-box;
 `;
 
@@ -168,16 +168,16 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
                 <button onClick={() => { this.autoSlider.prev(); }}>prev</button>
                 <button onClick={() => { this.autoSlider.next(); }}>next</button>
                 <div style={{ maxWidth: '1522px', border: '2px solid red' }}>
-                    <FullWidthSlider perPage={0} innerRef={this.getAutoSliderRef} mode={'centerFit'} clickable={true} preventClickOnDrag={true}>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></SingleSlide>
-                        <SingleSlide><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></SingleSlide>
+                    <FullWidthSlider perPage={{ 320: 1.5, 640: 2.5, 1100: 4 }} innerRef={this.getAutoSliderRef} mode={'left'} clickable={false} preventClickOnDrag={true}>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></SingleSlide>
+                        <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></SingleSlide>
                     </FullWidthSlider>
                 </div>
                 <hr style={{ clear: 'both' }} />
