@@ -119,6 +119,8 @@ var Siema = function (_React$Component2) {
             slideWidth = _this2$props$slideWid === undefined ? 0 : _this2$props$slideWid,
             _this2$props$mode = _this2$props.mode,
             mode = _this2$props$mode === undefined ? 'left' : _this2$props$mode,
+            _this2$props$freeDrag = _this2$props.freeDrag,
+            freeDrag = _this2$props$freeDrag === undefined ? false : _this2$props$freeDrag,
             _this2$props$startInd = _this2$props.startIndex,
             startIndex = _this2$props$startInd === undefined ? 0 : _this2$props$startInd,
             _this2$props$draggabl = _this2$props.draggable,
@@ -151,6 +153,7 @@ var Siema = function (_React$Component2) {
             perPage: perPage,
             slideWidth: slideWidth,
             mode: mode,
+            freeDrag: freeDrag,
             startIndex: startIndex,
             draggable: draggable,
             multipleDrag: multipleDrag,
@@ -172,6 +175,7 @@ var Siema = function (_React$Component2) {
         value: function componentWillReceiveProps(nextProps) {
             this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
             if (this.siemaInstance) {
+                // updating slides
                 var oldSlidesNumber = this.siemaWrapper.children[0].children.length;
                 var newSlidesNumber = this.slides.length;
                 if (newSlidesNumber > oldSlidesNumber) {
