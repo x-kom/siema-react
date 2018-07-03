@@ -52,6 +52,7 @@ class Siema extends React.Component<SiemaReactProps> {
             perPage = 1,
             slideWidth = 0,
             mode = 'left',
+            freeDrag = false,
             startIndex = 0,
             draggable = true,
             multipleDrag = true,
@@ -72,6 +73,7 @@ class Siema extends React.Component<SiemaReactProps> {
             perPage,
             slideWidth,
             mode,
+            freeDrag,
             startIndex,
             draggable,
             multipleDrag,
@@ -115,6 +117,7 @@ class Siema extends React.Component<SiemaReactProps> {
         this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
 
         if (this.siemaInstance) {
+            // updating slides
             const oldSlidesNumber = this.siemaWrapper.children[0].children.length;
             const newSlidesNumber = this.slides.length;
 
