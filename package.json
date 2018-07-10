@@ -32,7 +32,7 @@
     "dependencies": {
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
-        "siema": "x-kom/siema#5a4a8a57228979f6c3a2cbaac47dca2abdfbac15"
+        "siema": "x-kom/siema#1792a5b659255af46beda54bb23c240eda78993b"
     },
     "devDependencies": {
         "@types/enzyme": "^3.1.8",
