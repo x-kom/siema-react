@@ -113,9 +113,7 @@ class Siema extends React.Component<SiemaReactProps> {
         }
     }
 
-    public componentWillReceiveProps(nextProps: SiemaReactProps) {
-        this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
-
+    private updatePortals() {
         if (this.siemaInstance) {
             // updating slides
             const oldSlidesNumber = this.siemaWrapper.children[0].children.length;
@@ -143,9 +141,17 @@ class Siema extends React.Component<SiemaReactProps> {
         }
     }
 
+    public componentWillReceiveProps(nextProps: SiemaReactProps) {
+        this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
+
+        this.updatePortals();
+    }
+
     public componentDidMount() {
         this.options.selector = this.siemaWrapper;
         this.siemaInstance = new SiemaBase(this.options);
+        this.updatePortals();
+        this.forceUpdate();
     }
 
     wrapSlide = (slide, key) => <div key={key}>{slide}</div>;
