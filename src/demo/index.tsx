@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Siema from '../lib/siema-react';
 import styled from 'styled-components';
+import { WithBlur } from './components';
 
 const BigSlider = styled(Siema) `
     width: 400px;
@@ -129,11 +130,16 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
 
         return (
             <div>
+                <WithBlur />
                 <button onClick={this.moreSlides}>more slides</button>
                 <button onClick={this.lessSlides}>less slides</button>
                 <button onClick={this.shuffleSlides}>shuffle slides</button>
                 <BigSlider onChange={(index) => { console.log('onchange', index); }}>
                     {this.state.images.slice(0, this.state.slides).map((src) => <SingleSlide key={src}><img src={src} alt="Siema image" /></SingleSlide>)}
+                </BigSlider>
+                <hr />
+                <BigSlider>
+                    {this.state.images.slice(0, this.state.slides).map((src) => <WithBlur key={src}>{src}</WithBlur>)}
                 </BigSlider>
                 <hr />
                 Multiple visible slides
