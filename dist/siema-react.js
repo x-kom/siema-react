@@ -171,9 +171,8 @@ var Siema = function (_React$Component2) {
     }
 
     _createClass(Siema, [{
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
+        key: 'updatePortals',
+        value: function updatePortals() {
             if (this.siemaInstance) {
                 // updating slides
                 var oldSlidesNumber = this.siemaWrapper.children[0].children.length;
@@ -199,10 +198,18 @@ var Siema = function (_React$Component2) {
             }
         }
     }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(nextProps) {
+            this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
+            this.updatePortals();
+        }
+    }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
             this.options.selector = this.siemaWrapper;
             this.siemaInstance = new _siema2.default(this.options);
+            this.updatePortals();
+            this.forceUpdate();
         }
     }, {
         key: 'render',

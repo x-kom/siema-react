@@ -28,6 +28,7 @@ declare class Siema extends React.Component<SiemaReactProps> {
     constructor(props: SiemaReactProps);
     private getSiemaWrapperRef;
     private addClickEventForClickable;
+    private updatePortals();
     componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
     wrapSlide: (slide: any, key: any) => JSX.Element;
