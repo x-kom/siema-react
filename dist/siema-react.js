@@ -134,7 +134,7 @@ var Siema = function (_React$Component2) {
             _this2$props$overflow = _this2$props.overflowHidden,
             overflowHidden = _this2$props$overflow === undefined ? true : _this2$props$overflow,
             _this2$props$preventC = _this2$props.preventClickOnDrag,
-            preventClickOnDrag = _this2$props$preventC === undefined ? false : _this2$props$preventC,
+            preventClickOnDrag = _this2$props$preventC === undefined ? true : _this2$props$preventC,
             _this2$props$onInit = _this2$props.onInit,
             onInit = _this2$props$onInit === undefined ? function () {
             return undefined;

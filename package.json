@@ -1,6 +1,6 @@
 {
     "name": "siema-react",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "React binding to lightweight slider library named Siema",
     "main": "dist/siema-react.js",
     "types": "./tsc/src/lib/siema-react.d.ts",
