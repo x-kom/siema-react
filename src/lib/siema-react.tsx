@@ -59,7 +59,7 @@ class Siema extends React.Component<SiemaReactProps> {
             threshold = 20,
             loop = false,
             overflowHidden = true,
-            preventClickOnDrag = false,
+            preventClickOnDrag = true,
             onInit = () => undefined,
             onChange = () => undefined,
             // props
