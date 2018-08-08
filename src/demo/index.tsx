@@ -25,11 +25,27 @@ const SmallSlider = styled(Siema) `
 `;
 
 const TripleSlider = styled(Siema) `
-    width:300px;
+    width: 300px;
 
     img {
         width: 100px;
     }
+`;
+
+const SliderForModes = styled(Siema) `
+    width: 500px;
+
+    & > div {
+        width: 100px;
+
+        img {
+            width: 100%;
+        }
+    }
+`;
+
+const SlideHighlightable = styled.div`
+    ${({ active }: { active?: boolean }) => active ? 'box-shadow: inset 0 0 5px black;' : ''}
 `;
 
 const SmallSliderWrapper = styled.div`
@@ -89,6 +105,18 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
         mounted: true,
     };
 
+    staticSlides = [
+        'http://via.placeholder.com/350x150/FFC0CB?text=1',
+        'http://via.placeholder.com/350x150/ADD8E6?text=2',
+        'http://via.placeholder.com/350x150/FFC0CB?text=3',
+        'http://via.placeholder.com/350x150/ADD8E6?text=4',
+        'http://via.placeholder.com/350x150/FFC0CB?text=5',
+        'http://via.placeholder.com/350x150/ADD8E6?text=6',
+        'http://via.placeholder.com/350x150/FFC0CB?text=7',
+        'http://via.placeholder.com/350x150/ADD8E6?text=8',
+        'http://via.placeholder.com/350x150/FFC0CB?text=9',
+    ];
+
     private getSmallSliderRef = (element) => { this.smallSlider = element; };
     private getBigSliderRef = (element) => { this.bigSlider = element; };
     private getTripleSliderRef = (element) => { this.tripleSlider = element; };
@@ -126,53 +154,64 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
         this.setState((state) => ({ images: newImages }));
     }
 
+    // tslint:disable-next-line:max-func-body-length
     render() {
 
         return (
-            <div>
-                <WithBlur />
-                <button onClick={this.moreSlides}>more slides</button>
-                <button onClick={this.lessSlides}>less slides</button>
-                <button onClick={this.shuffleSlides}>shuffle slides</button>
-                <BigSlider onChange={(index) => { console.log('onchange', index); }}>
-                    {this.state.images.slice(0, this.state.slides).map((src) => <SingleSlide key={src}><img src={src} alt="Siema image" /></SingleSlide>)}
-                </BigSlider>
-                <hr />
+            <React.Fragment>
+                Slider with focusable element in slides (div with tabIndex)
                 <BigSlider>
                     {this.state.images.slice(0, this.state.slides).map((src) => <WithBlur key={src}>{src}</WithBlur>)}
                 </BigSlider>
                 <hr />
-                Multiple visible slides
+                Multiple visible slides (center mode made with an old method)
                 <SmallSliderWrapper>
                     <SmallSlider overflowHidden={false}>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                        {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                     </SmallSlider>
                 </SmallSliderWrapper>
                 <hr />
-                <button onClick={() => { this.tripleSlider.prev(); }}>prev</button>
-                <button onClick={() => { this.tripleSlider.next(); }}>next</button>
+                Standard slider with multiple slides, controlled with buttons
+                <div>
+                    <button onClick={() => { this.tripleSlider.prev(); }}>prev</button>
+                    <button onClick={() => { this.tripleSlider.next(); }}>next</button>
+                </div>
                 <TripleSlider perPage={3} innerRef={this.getTripleSliderRef} clickable={true} preventClickOnDrag={true}>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                    {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </TripleSlider>
+                <hr />
+                Slider with different modes (without freeDrag)
+                <SliderForModes perPage={0} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'right'} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'center'} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'centerFit'} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                Slider with different modes (with freeDrag)
+                <SliderForModes perPage={0} freeDrag={true} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'right'} freeDrag={true} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'center'} freeDrag={true} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
+                <SliderForModes perPage={0} mode={'centerFit'} freeDrag={true} clickable={true}>
+                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
+                </SliderForModes>
                 <hr style={{ clear: 'both' }} />
-                <button onClick={() => { this.autoSlider.prev(); }}>prev</button>
-                <button onClick={() => { this.autoSlider.next(); }}>next</button>
+                Responsive slider with changing number of visible slides (breakpoints: 1100px, 640px, 320px)
+                <div>
+                    <button onClick={() => { this.autoSlider.prev(); }}>prev</button>
+                    <button onClick={() => { this.autoSlider.next(); }}>next</button>
+                </div>
                 <div style={{ maxWidth: '1522px', border: '2px solid red' }}>
                     <FullWidthSlider perPage={{ 320: 1.5, 640: 2.5, 1100: 4 }} innerRef={this.getAutoSliderRef} mode={'left'} clickable={false} preventClickOnDrag={true}>
                         <SingleSlide fullWidth={true}><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></SingleSlide>
@@ -187,38 +226,33 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
                     </FullWidthSlider>
                 </div>
                 <hr style={{ clear: 'both' }} />
+                Two sliders joined
                 <button onClick={() => { this.bigSlider.prev(); }}>prev</button>
                 <button onClick={() => { this.bigSlider.next(); }}>next</button>
                 <BigSlider duration={100} innerRef={this.getBigSliderRef} onChange={(index: number) => { this.smallSlider.goTo(index); }}>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                    <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                    {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>
                 <SmallSliderWrapper>
                     <SmallSlider duration={100} innerRef={this.getSmallSliderRef} onChange={(index: number) => { this.bigSlider.goTo(index); }} overflowHidden={false} clickable={true}>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=1" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=2" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=3" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=4" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=5" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=6" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=7" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/ADD8E6?text=8" alt="Siema image" /></div>
-                        <div><img src="http://via.placeholder.com/350x150/FFC0CB?text=9" alt="Siema image" /></div>
+                        {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                     </SmallSlider>
                 </SmallSliderWrapper>
+                <hr />
+                Modifying set of slides
+                <div>
+                    <button onClick={this.moreSlides}>more slides</button>
+                    <button onClick={this.lessSlides}>less slides</button>
+                    <button onClick={this.shuffleSlides}>shuffle slides</button>
+                </div>
+                <BigSlider onChange={(index) => { console.log('onchange', index); }}>
+                    {this.state.images.slice(0, this.state.slides).map((src) => <SingleSlide key={src}><img src={src} alt="Siema image" /></SingleSlide>)}
+                </BigSlider>
                 <hr />
                 Unmounting example <button onClick={this.toggleMounted}>mount/unmount</button>
                 {this.state.mounted && <BigSlider>
                     {this.state.images.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>}
-            </div>
+            </React.Fragment>
         );
     }
 }
