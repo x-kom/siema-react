@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Siema from '../lib/siema-react';
 import styled from 'styled-components';
-import { WithBlur } from './components';
+import { WithBlur, SliderWithActiveSlide } from './components';
 
 const BigSlider = styled(Siema) `
     width: 400px;
@@ -30,22 +30,6 @@ const TripleSlider = styled(Siema) `
     img {
         width: 100px;
     }
-`;
-
-const SliderForModes = styled(Siema) `
-    width: 500px;
-
-    & > div {
-        width: 100px;
-
-        img {
-            width: 100%;
-        }
-    }
-`;
-
-const SlideHighlightable = styled.div`
-    ${({ active }: { active?: boolean }) => active ? 'box-shadow: inset 0 0 5px black;' : ''}
 `;
 
 const SmallSliderWrapper = styled.div`
@@ -181,31 +165,15 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
                 </TripleSlider>
                 <hr />
                 Slider with different modes (without freeDrag)
-                <SliderForModes perPage={0} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'right'} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'center'} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'centerFit'} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} mode={'right'} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} mode={'center'} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} mode={'centerFit'} />
                 Slider with different modes (with freeDrag)
-                <SliderForModes perPage={0} freeDrag={true} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'right'} freeDrag={true} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'center'} freeDrag={true} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
-                <SliderForModes perPage={0} mode={'centerFit'} freeDrag={true} clickable={true}>
-                    {this.staticSlides.map((src) => <SlideHighlightable key={src}><img src={src} alt="Siema image" /></SlideHighlightable>)}
-                </SliderForModes>
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} freeDrag={true} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} freeDrag={true} mode={'right'} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} freeDrag={true} mode={'center'} />
+                <SliderWithActiveSlide slides={this.staticSlides.slice(0, this.state.slides)} freeDrag={true} mode={'centerFit'} />
                 <hr style={{ clear: 'both' }} />
                 Responsive slider with changing number of visible slides (breakpoints: 1100px, 640px, 320px)
                 <div>
