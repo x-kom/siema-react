@@ -7,9 +7,7 @@ export type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
 
 export type SiemaReactProps =
-    Overwrite<Omit<SiemaOptions, 'selector'>, {
-        onChange?: (index: number) => void;
-    }> & {
+    Omit<SiemaOptions, 'selector'> & {
         clickable?: boolean;
         children?: React.ReactNode[];
         className?: string;
@@ -62,6 +60,7 @@ class Siema extends React.Component<SiemaReactProps> {
             preventClickOnDrag = true,
             onInit = () => undefined,
             onChange = () => undefined,
+            onDrag = () => undefined,
             // props
             clickable = false
         } = this.props;
@@ -82,7 +81,8 @@ class Siema extends React.Component<SiemaReactProps> {
             loop,
             overflowHidden,
             onInit,
-            onChange: () => onChange(this.siemaInstance.currentSlide),
+            onChange,
+            onDrag,
         };
 
         this.slides = this.addClickEventForClickable(this.props.children, clickable);
