@@ -107,7 +107,6 @@ var Siema = function (_React$Component2) {
         _this2.renderIntoPortal = function (slide, i) {
             return ReactDOM.createPortal(slide, _this2.portals[i]);
         };
-
         var _this2$props = _this2.props,
             _this2$props$duration = _this2$props.duration,
             duration = _this2$props$duration === undefined ? 200 : _this2$props$duration,
@@ -140,9 +139,13 @@ var Siema = function (_React$Component2) {
             return undefined;
         } : _this2$props$onInit,
             _this2$props$onChange = _this2$props.onChange,
-            _onChange = _this2$props$onChange === undefined ? function () {
+            onChange = _this2$props$onChange === undefined ? function () {
             return undefined;
         } : _this2$props$onChange,
+            _this2$props$onDrag = _this2$props.onDrag,
+            onDrag = _this2$props$onDrag === undefined ? function () {
+            return undefined;
+        } : _this2$props$onDrag,
             _this2$props$clickabl = _this2$props.clickable,
             clickable = _this2$props$clickabl === undefined ? false : _this2$props$clickabl;
 
@@ -162,9 +165,8 @@ var Siema = function (_React$Component2) {
             loop: loop,
             overflowHidden: overflowHidden,
             onInit: onInit,
-            onChange: function onChange() {
-                return _onChange(_this2.siemaInstance.currentSlide);
-            }
+            onChange: onChange,
+            onDrag: onDrag
         };
         _this2.slides = _this2.addClickEventForClickable(_this2.props.children, clickable);
         return _this2;

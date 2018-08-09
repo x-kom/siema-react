@@ -9,9 +9,7 @@ export declare type Diff<T extends string, U extends string> = ({
 })[T];
 export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export declare type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
-export declare type SiemaReactProps = Overwrite<Omit<SiemaOptions, 'selector'>, {
-    onChange?: (index: number) => void;
-}> & {
+export declare type SiemaReactProps = Omit<SiemaOptions, 'selector'> & {
     clickable?: boolean;
     children?: React.ReactNode[];
     className?: string;

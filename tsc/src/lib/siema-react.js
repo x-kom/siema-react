@@ -46,7 +46,7 @@ class Siema extends React.Component {
         this.renderIntoPortal = (slide, i) => ReactDOM.createPortal(slide, this.portals[i]);
         const { 
         // options
-        duration = 200, easing = 'ease-out', perPage = 1, slideWidth = 0, mode = 'left', freeDrag = false, startIndex = 0, draggable = true, multipleDrag = true, threshold = 20, loop = false, overflowHidden = true, preventClickOnDrag = true, onInit = () => undefined, onChange = () => undefined, 
+        duration = 200, easing = 'ease-out', perPage = 1, slideWidth = 0, mode = 'left', freeDrag = false, startIndex = 0, draggable = true, multipleDrag = true, threshold = 20, loop = false, overflowHidden = true, preventClickOnDrag = true, onInit = () => undefined, onChange = () => undefined, onDrag = () => undefined, 
         // props
         clickable = false } = this.props;
         this.options = {
@@ -65,7 +65,8 @@ class Siema extends React.Component {
             loop,
             overflowHidden,
             onInit,
-            onChange: () => onChange(this.siemaInstance.currentSlide),
+            onChange,
+            onDrag,
         };
         this.slides = this.addClickEventForClickable(this.props.children, clickable);
     }
