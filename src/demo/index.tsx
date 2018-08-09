@@ -197,11 +197,11 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
                 Two sliders joined
                 <button onClick={() => { this.bigSlider.prev(); }}>prev</button>
                 <button onClick={() => { this.bigSlider.next(); }}>next</button>
-                <BigSlider duration={100} innerRef={this.getBigSliderRef} onChange={(index: number) => { this.smallSlider.goTo(index); }}>
+                <BigSlider duration={100} innerRef={this.getBigSliderRef} onChange={({ currentSlide }) => { this.smallSlider.goTo(currentSlide); }}>
                     {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                 </BigSlider>
                 <SmallSliderWrapper>
-                    <SmallSlider duration={100} innerRef={this.getSmallSliderRef} onChange={(index: number) => { this.bigSlider.goTo(index); }} overflowHidden={false} clickable={true}>
+                    <SmallSlider duration={100} innerRef={this.getSmallSliderRef} onChange={(currentSlide) => { this.bigSlider.goTo(currentSlide); }} overflowHidden={false} clickable={true}>
                         {this.staticSlides.map((src) => <div key={src}><img src={src} alt="Siema image" /></div>)}
                     </SmallSlider>
                 </SmallSliderWrapper>
@@ -212,7 +212,7 @@ class App extends React.Component<{}, { slides: number; images: string[]; mounte
                     <button onClick={this.lessSlides}>less slides</button>
                     <button onClick={this.shuffleSlides}>shuffle slides</button>
                 </div>
-                <BigSlider onChange={(index) => { console.log('onchange', index); }}>
+                <BigSlider onChange={({ currentSlide }) => { console.log('onchange', currentSlide); }}>
                     {this.state.images.slice(0, this.state.slides).map((src) => <SingleSlide key={src}><img src={src} alt="Siema image" /></SingleSlide>)}
                 </BigSlider>
                 <hr />
