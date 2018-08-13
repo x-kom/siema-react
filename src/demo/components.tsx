@@ -87,8 +87,9 @@ export class SliderWithActiveSlide extends React.Component<{ mode?: SiemaOptions
         this.slider = slider;
     }
 
-    onChange = (index) => {
-        this.setState({ activeSlide: index });
+    onChange = (params) => {
+        console.log(params);
+        this.setState({ activeSlide: params.currentSlide });
     }
 
     prev = () => {

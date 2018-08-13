@@ -154,6 +154,10 @@ class Siema extends React.Component<SiemaReactProps> {
         this.forceUpdate();
     }
 
+    public componentWillUnmount() {
+        this.siemaInstance.destroy(false);
+    }
+
     wrapSlide = (slide, key) => <div key={key}>{slide}</div>;
     renderIntoPortal = (slide, i) => ReactDOM.createPortal(slide, this.portals[i]);
 
