@@ -106,6 +106,9 @@ class Siema extends React.Component {
         this.updatePortals();
         this.forceUpdate();
     }
+    componentWillUnmount() {
+        this.siemaInstance.destroy(false);
+    }
     render() {
         return (React.createElement(React.Fragment, null,
             React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)),

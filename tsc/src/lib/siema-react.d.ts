@@ -29,6 +29,7 @@ declare class Siema extends React.Component<SiemaReactProps> {
     private updatePortals();
     componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
+    componentWillUnmount(): void;
     wrapSlide: (slide: any, key: any) => JSX.Element;
     renderIntoPortal: (slide: any, i: any) => React.ReactPortal;
     render(): JSX.Element;

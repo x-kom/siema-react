@@ -214,6 +214,11 @@ var Siema = function (_React$Component2) {
             this.forceUpdate();
         }
     }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            this.siemaInstance.destroy(false);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return React.createElement(React.Fragment, null, React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)), this.slides.length > 0 && this.portals.length > 0 && this.slides.map(this.renderIntoPortal));
