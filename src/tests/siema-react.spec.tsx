@@ -33,7 +33,7 @@ describe('Siema react', () => {
 
     it('should properly mount component with all given children', () => {
         expect(component).toHaveLength(1);
-        expect(component.children().filterWhere(n => n.type() === ExampleChildren)).toHaveLength(images.length)
+        expect(component.children().filterWhere((n) => n.type() === ExampleChildren)).toHaveLength(images.length)
         expect(component.find('SiemaWrapper').find(ExampleChildren)).toHaveLength(images.length);
     });
 
