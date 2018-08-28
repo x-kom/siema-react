@@ -4,7 +4,7 @@ import Siema from '../lib/siema-react';
 import styled from 'styled-components';
 import { WithBlur, SliderWithActiveSlide } from './components';
 
-const BigSlider = styled(Siema) `
+const BigSlider = styled(Siema)`
     width: 400px;
 
     img {
@@ -12,7 +12,7 @@ const BigSlider = styled(Siema) `
     }
 `;
 
-const SmallSlider = styled(Siema) `
+const SmallSlider = styled(Siema)`
     width: 100px;
     margin: 0 150px;
 
@@ -24,7 +24,7 @@ const SmallSlider = styled(Siema) `
     }
 `;
 
-const TripleSlider = styled(Siema) `
+const TripleSlider = styled(Siema)`
     width: 300px;
 
     img {
@@ -58,7 +58,7 @@ const SmallSliderWrapper = styled.div`
     }
 `;
 
-const FullWidthSlider = styled(Siema) `
+const FullWidthSlider = styled(Siema)`
     width: 100%;
 `;
 

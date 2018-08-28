@@ -1,6 +1,6 @@
 {
     "name": "siema-react",
-    "version": "0.0.9",
+    "version": "0.1.0",
     "description": "React binding to lightweight slider library named Siema",
     "main": "dist/siema-react.js",
     "types": "./tsc/src/lib/siema-react.d.ts",
@@ -15,7 +15,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/aczekajski/siema-react.git"
+        "url": "git+https://github.com/x-kom/siema-react.git"
     },
     "keywords": [
         "react",
@@ -26,9 +26,9 @@
     "author": "arkadiusz.czekajski@x-kom.pl",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/aczekajski/siema-react/issues"
+        "url": "https://github.com/x-kom/siema-react/issues"
     },
-    "homepage": "https://github.com/aczekajski/siema-react#readme",
+    "homepage": "https://github.com/x-kom/siema-react#readme",
     "dependencies": {
         "react": "^16.2.0",
         "react-dom": "^16.2.0",
@@ -40,11 +40,11 @@
         "@types/react": "^16.0.34",
         "@types/react-dom": "^16.0.3",
         "@types/webpack-env": "^1.13.3",
-        "enzyme": "^3.3.0",
-        "enzyme-adapter-react-16": "^1.1.1",
         "awesome-typescript-loader": "3.4.1",
         "babel-cli": "^6.26.0",
         "babel-preset-es2015": "^6.24.1",
+        "enzyme": "^3.4.4",
+        "enzyme-adapter-react-16": "^1.2.0",
         "html-webpack-plugin": "2.30.1",
         "jest": "22.0.4",
         "react-hot-loader": "3.0.0-beta.7",
@@ -57,7 +57,7 @@
         "tslint-immutable": "4.5.0",
         "tslint-microsoft-contrib": "5.0.1",
         "tslint-react": "3.2.0",
-        "typescript": "^2.6.2",
+        "typescript": "^2.9.0",
         "url-loader": "0.6.2",
         "webpack": "3.10.0",
         "webpack-dev-server": "2.9.7",
