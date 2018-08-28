@@ -1,12 +1,6 @@
 import * as React from 'react';
 import SiemaBase, { SiemaOptions } from 'siema';
-export declare type Diff<T extends string, U extends string> = ({
-    [P in T]: P;
-} & {
-    [P in U]: never;
-} & {
-    [x: string]: never;
-})[T];
+export declare type Diff<T, U> = T extends U ? never : T;
 export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
 export declare type Overwrite<T, U> = Pick<T, Diff<keyof T, keyof U>> & U;
 export declare type SiemaReactProps = Omit<SiemaOptions, 'selector'> & {
@@ -26,7 +20,7 @@ declare class Siema extends React.Component<SiemaReactProps> {
     constructor(props: SiemaReactProps);
     private getSiemaWrapperRef;
     private addClickEventForClickable;
-    private updatePortals();
+    private updatePortals;
     componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
     componentWillUnmount(): void;
