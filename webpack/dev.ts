@@ -1,8 +1,11 @@
-import * as path from 'path';
-import * as webpack from 'webpack';
-import * as HtmlWebpackPlugin from 'html-webpack-plugin';
+import path from 'path';
+import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 
 const config = {
+    mode: 'development',
+
     entry: [
         'react-hot-loader/patch',
         path.resolve(__dirname, '../src/demo/index'),
@@ -32,7 +35,14 @@ const config = {
                 include: path.resolve(__dirname, '../src'),
                 loaders: [
                     'react-hot-loader/webpack',
-                    'awesome-typescript-loader',
+                    {
+                       loader: 'ts-loader',
+                       options: {
+                          configFile: path.resolve(__dirname, '../tsconfig.json'),
+                          // disable type checker - we will use it in fork plugin
+                          transpileOnly: true,
+                       },
+                    },
                 ],
                 test: /\.tsx?$/,
             },
@@ -42,6 +52,9 @@ const config = {
         ],
     },
     plugins: [
+        new ForkTsCheckerWebpackPlugin({
+           tsconfig: path.resolve(__dirname, '../tsconfig.json'),
+        }),
         new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new HtmlWebpackPlugin({
