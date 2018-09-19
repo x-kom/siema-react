@@ -138,7 +138,7 @@ class Siema extends React.PureComponent<SiemaReactProps> {
                 }
                 this.portals[i] = this.siemaWrapper.children[0].children[i].children[0];
             }
-            for (let i = newSlidesNumber; i < oldSlidesNumber; ++i) {
+            for (let i = newSlidesNumber; i < oldPortalsNumber; ++i) {
                 this.portals.pop();
             }
 
