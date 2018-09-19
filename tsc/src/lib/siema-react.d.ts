@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import SiemaBase, { SiemaOptions } from 'siema';
 export declare type Diff<T, U> = T extends U ? never : T;
 export declare type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>;
@@ -8,7 +8,7 @@ export declare type SiemaReactProps = Omit<SiemaOptions, 'selector'> & {
     children?: React.ReactNode[];
     className?: string;
 };
-declare class Siema extends React.Component<SiemaReactProps> {
+declare class Siema extends React.PureComponent<SiemaReactProps> {
     private siemaWrapper;
     private siemaInstance;
     private slides;
@@ -21,8 +21,8 @@ declare class Siema extends React.Component<SiemaReactProps> {
     private getSiemaWrapperRef;
     private addClickEventForClickable;
     private updatePortals;
-    componentWillReceiveProps(nextProps: SiemaReactProps): void;
     componentDidMount(): void;
+    componentDidUpdate(): void;
     componentWillUnmount(): void;
     wrapSlide: (slide: any, key: any) => JSX.Element;
     renderIntoPortal: (slide: any, i: any) => React.ReactPortal;

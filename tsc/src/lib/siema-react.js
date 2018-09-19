@@ -1,39 +1,70 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import SiemaBase from 'siema';
-class SiemaWrapper extends React.Component {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var react_1 = tslib_1.__importDefault(require("react"));
+var react_dom_1 = tslib_1.__importDefault(require("react-dom"));
+var siema_1 = tslib_1.__importDefault(require("siema"));
+var memoize_one_1 = tslib_1.__importDefault(require("memoize-one"));
+var SiemaWrapper = /** @class */ (function (_super) {
+    tslib_1.__extends(SiemaWrapper, _super);
+    function SiemaWrapper() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
     // since all further children updates will be handled in "componentWillReceiveProps" of the main Siema component
     // we render this wrapper only once at the beginning for the slides to be visible in SSR output and for proper `hydrate` after that
-    shouldComponentUpdate() {
+    SiemaWrapper.prototype.shouldComponentUpdate = function () {
         return false;
-    }
-    render() {
-        return (React.createElement("div", { ref: this.props.innerRef, className: this.props.className }, this.props.children));
-    }
-}
-class Siema extends React.Component {
-    constructor(props) {
-        super(props);
-        this.portals = [];
-        this.prev = (...args) => { this.siemaInstance.prev(...args); };
-        this.next = (...args) => { this.siemaInstance.next(...args); };
-        this.goTo = (...args) => { this.siemaInstance.goTo(...args); }; // TODO: improve types
-        this.getSiemaWrapperRef = (element) => { this.siemaWrapper = element; };
-        this.addClickEventForClickable = (children, clickable) => {
+    };
+    SiemaWrapper.prototype.render = function () {
+        return (react_1.default.createElement("div", { ref: this.props.innerRef, className: this.props.className }, this.props.children));
+    };
+    return SiemaWrapper;
+}(react_1.default.Component));
+var Siema = /** @class */ (function (_super) {
+    tslib_1.__extends(Siema, _super);
+    function Siema(props) {
+        var _this = _super.call(this, props) || this;
+        _this.portals = [];
+        _this.prev = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).prev.apply(_a, args);
+        };
+        _this.next = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).next.apply(_a, args);
+        };
+        _this.goTo = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).goTo.apply(_a, args);
+        }; // TODO: improve types
+        _this.getSiemaWrapperRef = function (element) { _this.siemaWrapper = element; };
+        _this.addClickEventForClickable = memoize_one_1.default(function (children, clickable) {
             if (clickable) {
-                this.options.preventClickOnDrag = true;
-                return React.Children.map(children, (child, index) => {
-                    let childNode;
+                _this.options.preventClickOnDrag = true;
+                return react_1.default.Children.map(children, function (child, index) {
+                    var childNode;
                     childNode =
                         (typeof child === 'string' || typeof child === 'number' || typeof child.type === 'undefined')
-                            ? React.createElement("div", null, child)
+                            ? react_1.default.createElement("div", null, child)
                             : child;
-                    return React.cloneElement(childNode, {
-                        onClick: (e) => {
+                    return react_1.default.cloneElement(childNode, {
+                        onClick: function (e) {
                             if (typeof childNode.props.onClick === 'function') {
                                 childNode.props.onClick(e);
                             }
-                            this.goTo(index);
+                            _this.goTo(index);
                         }
                     });
                 });
@@ -41,79 +72,86 @@ class Siema extends React.Component {
             else {
                 return children;
             }
-        };
-        this.wrapSlide = (slide, key) => React.createElement("div", { key: key }, slide);
-        this.renderIntoPortal = (slide, i) => ReactDOM.createPortal(slide, this.portals[i]);
-        const { 
+        });
+        _this.wrapSlide = function (slide, key) { return react_1.default.createElement("div", { key: key }, slide); };
+        _this.renderIntoPortal = function (slide, i) { return react_dom_1.default.createPortal(slide, _this.portals[i]); };
+        var _a = _this.props, 
         // options
-        duration = 200, easing = 'ease-out', perPage = 1, slideWidth = 0, mode = 'left', freeDrag = false, startIndex = 0, draggable = true, multipleDrag = true, threshold = 20, loop = false, overflowHidden = true, preventClickOnDrag = true, onInit = () => undefined, onChange = () => undefined, onDrag = () => undefined, 
-        // props
-        clickable = false } = this.props;
-        this.options = {
+        _b = _a.duration, 
+        // options
+        duration = _b === void 0 ? 200 : _b, _c = _a.easing, easing = _c === void 0 ? 'ease-out' : _c, _d = _a.perPage, perPage = _d === void 0 ? 1 : _d, _e = _a.slideWidth, slideWidth = _e === void 0 ? 0 : _e, _f = _a.mode, mode = _f === void 0 ? 'left' : _f, _g = _a.freeDrag, freeDrag = _g === void 0 ? false : _g, _h = _a.startIndex, startIndex = _h === void 0 ? 0 : _h, _j = _a.draggable, draggable = _j === void 0 ? true : _j, _k = _a.multipleDrag, multipleDrag = _k === void 0 ? true : _k, _l = _a.threshold, threshold = _l === void 0 ? 20 : _l, _m = _a.loop, loop = _m === void 0 ? false : _m, _o = _a.overflowHidden, overflowHidden = _o === void 0 ? true : _o, _p = _a.preventClickOnDrag, preventClickOnDrag = _p === void 0 ? true : _p, _q = _a.onInit, onInit = _q === void 0 ? function () { return undefined; } : _q, _r = _a.onChange, onChange = _r === void 0 ? function () { return undefined; } : _r, _s = _a.onDrag, onDrag = _s === void 0 ? function () { return undefined; } : _s;
+        _this.options = {
             selector: null,
-            duration,
-            easing,
-            perPage,
-            slideWidth,
-            mode,
-            freeDrag,
-            startIndex,
-            draggable,
-            multipleDrag,
-            threshold,
-            preventClickOnDrag,
-            loop,
-            overflowHidden,
-            onInit,
-            onChange,
-            onDrag,
+            duration: duration,
+            easing: easing,
+            perPage: perPage,
+            slideWidth: slideWidth,
+            mode: mode,
+            freeDrag: freeDrag,
+            startIndex: startIndex,
+            draggable: draggable,
+            multipleDrag: multipleDrag,
+            threshold: threshold,
+            preventClickOnDrag: preventClickOnDrag,
+            loop: loop,
+            overflowHidden: overflowHidden,
+            onInit: onInit,
+            onChange: onChange,
+            onDrag: onDrag,
         };
-        this.slides = this.addClickEventForClickable(this.props.children, clickable);
+        return _this;
     }
-    updatePortals() {
+    Siema.prototype.updatePortals = function () {
         if (this.siemaInstance) {
             // updating slides
-            const oldSlidesNumber = this.siemaWrapper.children[0].children.length;
-            const newSlidesNumber = this.slides.length;
+            var oldPortalsNumber = this.portals.length;
+            var oldSlidesNumber = this.siemaWrapper.children[0].children.length;
+            var newSlidesNumber = this.slides.length;
             if (newSlidesNumber > oldSlidesNumber) {
-                for (let i = oldSlidesNumber; i < newSlidesNumber; ++i) {
+                for (var i = oldSlidesNumber; i < newSlidesNumber; ++i) {
                     this.siemaInstance.append(document.createElement('div'));
                 }
             }
             else if (newSlidesNumber < oldSlidesNumber) {
-                for (let i = oldSlidesNumber - 1; i >= newSlidesNumber; --i) {
+                for (var i = oldSlidesNumber - 1; i >= newSlidesNumber; --i) {
                     this.siemaInstance.remove(i);
                 }
             }
-            for (let i = 0; i < this.slides.length; ++i) {
+            for (var i = 0; i < newSlidesNumber; ++i) {
                 if (!this.portals[i]) {
-                    const slideWrapper = this.siemaWrapper.children[0].children[i].children[0];
+                    var slideWrapper = this.siemaWrapper.children[0].children[i].children[0];
                     if (slideWrapper.children.length > 0) {
                         slideWrapper.removeChild(slideWrapper.children[0]);
                     }
                 }
                 this.portals[i] = this.siemaWrapper.children[0].children[i].children[0];
             }
+            for (var i = newSlidesNumber; i < oldPortalsNumber; ++i) {
+                this.portals.pop();
+            }
+            if (oldPortalsNumber !== this.portals.length) {
+                this.forceUpdate();
+            }
         }
-    }
-    componentWillReceiveProps(nextProps) {
-        this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
-        this.updatePortals();
-    }
-    componentDidMount() {
+    };
+    Siema.prototype.componentDidMount = function () {
         this.options.selector = this.siemaWrapper;
-        this.siemaInstance = new SiemaBase(this.options);
-        this.updatePortals();
-        this.forceUpdate();
-    }
-    componentWillUnmount() {
+        this.siemaInstance = new siema_1.default(this.options);
+        this.updatePortals(); // will cause rerender
+    };
+    Siema.prototype.componentDidUpdate = function () {
+        this.updatePortals(); // may cause rerender
+    };
+    Siema.prototype.componentWillUnmount = function () {
         this.siemaInstance.destroy(false);
-    }
-    render() {
-        return (React.createElement(React.Fragment, null,
-            React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)),
-            this.slides.length > 0 && this.portals.length > 0 && this.slides.map(this.renderIntoPortal)));
-    }
-}
-export default Siema;
+    };
+    Siema.prototype.render = function () {
+        this.slides = this.addClickEventForClickable(this.props.children, this.props.clickable);
+        return (react_1.default.createElement(react_1.default.Fragment, null,
+            react_1.default.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)),
+            this.slides.length > 0 && this.portals.length > 0 && this.slides.slice(0, this.portals.length).map(this.renderIntoPortal)));
+    };
+    return Siema;
+}(react_1.default.PureComponent));
+exports.default = Siema;
 //# sourceMappingURL=siema-react.js.map

@@ -1,155 +1,127 @@
-'use strict';
+"use strict";
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var React = _interopRequireWildcard(_react);
-
-var _reactDom = require('react-dom');
-
-var ReactDOM = _interopRequireWildcard(_reactDom);
-
-var _siema = require('siema');
-
-var _siema2 = _interopRequireDefault(_siema);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var SiemaWrapper = function (_React$Component) {
-    _inherits(SiemaWrapper, _React$Component);
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var tslib_1 = require("tslib");
+var react_1 = tslib_1.__importDefault(require("react"));
+var react_dom_1 = tslib_1.__importDefault(require("react-dom"));
+var siema_1 = tslib_1.__importDefault(require("siema"));
+var memoize_one_1 = tslib_1.__importDefault(require("memoize-one"));
+var SiemaWrapper = /** @class */function (_super) {
+    tslib_1.__extends(SiemaWrapper, _super);
     function SiemaWrapper() {
-        _classCallCheck(this, SiemaWrapper);
-
-        return _possibleConstructorReturn(this, (SiemaWrapper.__proto__ || Object.getPrototypeOf(SiemaWrapper)).apply(this, arguments));
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-
-    _createClass(SiemaWrapper, [{
-        key: 'shouldComponentUpdate',
-
-        // since all further children updates will be handled in "componentWillReceiveProps" of the main Siema component
-        // we render this wrapper only once at the beginning for the slides to be visible in SSR output and for proper `hydrate` after that
-        value: function shouldComponentUpdate() {
-            return false;
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement("div", { ref: this.props.innerRef, className: this.props.className }, this.props.children);
-        }
-    }]);
-
+    // since all further children updates will be handled in "componentWillReceiveProps" of the main Siema component
+    // we render this wrapper only once at the beginning for the slides to be visible in SSR output and for proper `hydrate` after that
+    SiemaWrapper.prototype.shouldComponentUpdate = function () {
+        return false;
+    };
+    SiemaWrapper.prototype.render = function () {
+        return react_1.default.createElement("div", { ref: this.props.innerRef, className: this.props.className }, this.props.children);
+    };
     return SiemaWrapper;
-}(React.Component);
-
-var Siema = function (_React$Component2) {
-    _inherits(Siema, _React$Component2);
-
+}(react_1.default.Component);
+var Siema = /** @class */function (_super) {
+    tslib_1.__extends(Siema, _super);
     function Siema(props) {
-        _classCallCheck(this, Siema);
-
-        var _this2 = _possibleConstructorReturn(this, (Siema.__proto__ || Object.getPrototypeOf(Siema)).call(this, props));
-
-        _this2.portals = [];
-        _this2.prev = function () {
-            var _this2$siemaInstance;
-
-            (_this2$siemaInstance = _this2.siemaInstance).prev.apply(_this2$siemaInstance, arguments);
+        var _this = _super.call(this, props) || this;
+        _this.portals = [];
+        _this.prev = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).prev.apply(_a, args);
         };
-        _this2.next = function () {
-            var _this2$siemaInstance2;
-
-            (_this2$siemaInstance2 = _this2.siemaInstance).next.apply(_this2$siemaInstance2, arguments);
+        _this.next = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).next.apply(_a, args);
         };
-        _this2.goTo = function () {
-            var _this2$siemaInstance3;
-
-            (_this2$siemaInstance3 = _this2.siemaInstance).goTo.apply(_this2$siemaInstance3, arguments);
+        _this.goTo = function () {
+            var args = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                args[_i] = arguments[_i];
+            }
+            var _a;
+            (_a = _this.siemaInstance).goTo.apply(_a, args);
         }; // TODO: improve types
-        _this2.getSiemaWrapperRef = function (element) {
-            _this2.siemaWrapper = element;
+        _this.getSiemaWrapperRef = function (element) {
+            _this.siemaWrapper = element;
         };
-        _this2.addClickEventForClickable = function (children, clickable) {
+        _this.addClickEventForClickable = memoize_one_1.default(function (children, clickable) {
             if (clickable) {
-                _this2.options.preventClickOnDrag = true;
-                return React.Children.map(children, function (child, index) {
-                    var childNode = void 0;
-                    childNode = typeof child === 'string' || typeof child === 'number' || typeof child.type === 'undefined' ? React.createElement("div", null, child) : child;
-                    return React.cloneElement(childNode, {
+                _this.options.preventClickOnDrag = true;
+                return react_1.default.Children.map(children, function (child, index) {
+                    var childNode;
+                    childNode = typeof child === 'string' || typeof child === 'number' || typeof child.type === 'undefined' ? react_1.default.createElement("div", null, child) : child;
+                    return react_1.default.cloneElement(childNode, {
                         onClick: function onClick(e) {
                             if (typeof childNode.props.onClick === 'function') {
                                 childNode.props.onClick(e);
                             }
-                            _this2.goTo(index);
+                            _this.goTo(index);
                         }
                     });
                 });
             } else {
                 return children;
             }
+        });
+        _this.wrapSlide = function (slide, key) {
+            return react_1.default.createElement("div", { key: key }, slide);
         };
-        _this2.wrapSlide = function (slide, key) {
-            return React.createElement("div", { key: key }, slide);
+        _this.renderIntoPortal = function (slide, i) {
+            return react_dom_1.default.createPortal(slide, _this.portals[i]);
         };
-        _this2.renderIntoPortal = function (slide, i) {
-            return ReactDOM.createPortal(slide, _this2.portals[i]);
-        };
-        var _this2$props = _this2.props,
-            _this2$props$duration = _this2$props.duration,
-            duration = _this2$props$duration === undefined ? 200 : _this2$props$duration,
-            _this2$props$easing = _this2$props.easing,
-            easing = _this2$props$easing === undefined ? 'ease-out' : _this2$props$easing,
-            _this2$props$perPage = _this2$props.perPage,
-            perPage = _this2$props$perPage === undefined ? 1 : _this2$props$perPage,
-            _this2$props$slideWid = _this2$props.slideWidth,
-            slideWidth = _this2$props$slideWid === undefined ? 0 : _this2$props$slideWid,
-            _this2$props$mode = _this2$props.mode,
-            mode = _this2$props$mode === undefined ? 'left' : _this2$props$mode,
-            _this2$props$freeDrag = _this2$props.freeDrag,
-            freeDrag = _this2$props$freeDrag === undefined ? false : _this2$props$freeDrag,
-            _this2$props$startInd = _this2$props.startIndex,
-            startIndex = _this2$props$startInd === undefined ? 0 : _this2$props$startInd,
-            _this2$props$draggabl = _this2$props.draggable,
-            draggable = _this2$props$draggabl === undefined ? true : _this2$props$draggabl,
-            _this2$props$multiple = _this2$props.multipleDrag,
-            multipleDrag = _this2$props$multiple === undefined ? true : _this2$props$multiple,
-            _this2$props$threshol = _this2$props.threshold,
-            threshold = _this2$props$threshol === undefined ? 20 : _this2$props$threshol,
-            _this2$props$loop = _this2$props.loop,
-            loop = _this2$props$loop === undefined ? false : _this2$props$loop,
-            _this2$props$overflow = _this2$props.overflowHidden,
-            overflowHidden = _this2$props$overflow === undefined ? true : _this2$props$overflow,
-            _this2$props$preventC = _this2$props.preventClickOnDrag,
-            preventClickOnDrag = _this2$props$preventC === undefined ? true : _this2$props$preventC,
-            _this2$props$onInit = _this2$props.onInit,
-            onInit = _this2$props$onInit === undefined ? function () {
-            return undefined;
-        } : _this2$props$onInit,
-            _this2$props$onChange = _this2$props.onChange,
-            onChange = _this2$props$onChange === undefined ? function () {
-            return undefined;
-        } : _this2$props$onChange,
-            _this2$props$onDrag = _this2$props.onDrag,
-            onDrag = _this2$props$onDrag === undefined ? function () {
-            return undefined;
-        } : _this2$props$onDrag,
-            _this2$props$clickabl = _this2$props.clickable,
-            clickable = _this2$props$clickabl === undefined ? false : _this2$props$clickabl;
+        var _a = _this.props,
 
-        _this2.options = {
+        // options
+        _b = _a.duration,
+
+        // options
+        duration = _b === void 0 ? 200 : _b,
+            _c = _a.easing,
+            easing = _c === void 0 ? 'ease-out' : _c,
+            _d = _a.perPage,
+            perPage = _d === void 0 ? 1 : _d,
+            _e = _a.slideWidth,
+            slideWidth = _e === void 0 ? 0 : _e,
+            _f = _a.mode,
+            mode = _f === void 0 ? 'left' : _f,
+            _g = _a.freeDrag,
+            freeDrag = _g === void 0 ? false : _g,
+            _h = _a.startIndex,
+            startIndex = _h === void 0 ? 0 : _h,
+            _j = _a.draggable,
+            draggable = _j === void 0 ? true : _j,
+            _k = _a.multipleDrag,
+            multipleDrag = _k === void 0 ? true : _k,
+            _l = _a.threshold,
+            threshold = _l === void 0 ? 20 : _l,
+            _m = _a.loop,
+            loop = _m === void 0 ? false : _m,
+            _o = _a.overflowHidden,
+            overflowHidden = _o === void 0 ? true : _o,
+            _p = _a.preventClickOnDrag,
+            preventClickOnDrag = _p === void 0 ? true : _p,
+            _q = _a.onInit,
+            onInit = _q === void 0 ? function () {
+            return undefined;
+        } : _q,
+            _r = _a.onChange,
+            onChange = _r === void 0 ? function () {
+            return undefined;
+        } : _r,
+            _s = _a.onDrag,
+            onDrag = _s === void 0 ? function () {
+            return undefined;
+        } : _s;
+        _this.options = {
             selector: null,
             duration: duration,
             easing: easing,
@@ -168,65 +140,56 @@ var Siema = function (_React$Component2) {
             onChange: onChange,
             onDrag: onDrag
         };
-        _this2.slides = _this2.addClickEventForClickable(_this2.props.children, clickable);
-        return _this2;
+        return _this;
     }
-
-    _createClass(Siema, [{
-        key: 'updatePortals',
-        value: function updatePortals() {
-            if (this.siemaInstance) {
-                // updating slides
-                var oldSlidesNumber = this.siemaWrapper.children[0].children.length;
-                var newSlidesNumber = this.slides.length;
-                if (newSlidesNumber > oldSlidesNumber) {
-                    for (var i = oldSlidesNumber; i < newSlidesNumber; ++i) {
-                        this.siemaInstance.append(document.createElement('div'));
-                    }
-                } else if (newSlidesNumber < oldSlidesNumber) {
-                    for (var _i = oldSlidesNumber - 1; _i >= newSlidesNumber; --_i) {
-                        this.siemaInstance.remove(_i);
-                    }
+    Siema.prototype.updatePortals = function () {
+        if (this.siemaInstance) {
+            // updating slides
+            var oldPortalsNumber = this.portals.length;
+            var oldSlidesNumber = this.siemaWrapper.children[0].children.length;
+            var newSlidesNumber = this.slides.length;
+            if (newSlidesNumber > oldSlidesNumber) {
+                for (var i = oldSlidesNumber; i < newSlidesNumber; ++i) {
+                    this.siemaInstance.append(document.createElement('div'));
                 }
-                for (var _i2 = 0; _i2 < this.slides.length; ++_i2) {
-                    if (!this.portals[_i2]) {
-                        var slideWrapper = this.siemaWrapper.children[0].children[_i2].children[0];
-                        if (slideWrapper.children.length > 0) {
-                            slideWrapper.removeChild(slideWrapper.children[0]);
-                        }
-                    }
-                    this.portals[_i2] = this.siemaWrapper.children[0].children[_i2].children[0];
+            } else if (newSlidesNumber < oldSlidesNumber) {
+                for (var i = oldSlidesNumber - 1; i >= newSlidesNumber; --i) {
+                    this.siemaInstance.remove(i);
                 }
             }
+            for (var i = 0; i < newSlidesNumber; ++i) {
+                if (!this.portals[i]) {
+                    var slideWrapper = this.siemaWrapper.children[0].children[i].children[0];
+                    if (slideWrapper.children.length > 0) {
+                        slideWrapper.removeChild(slideWrapper.children[0]);
+                    }
+                }
+                this.portals[i] = this.siemaWrapper.children[0].children[i].children[0];
+            }
+            for (var i = newSlidesNumber; i < oldPortalsNumber; ++i) {
+                this.portals.pop();
+            }
+            if (oldPortalsNumber !== this.portals.length) {
+                this.forceUpdate();
+            }
         }
-    }, {
-        key: 'componentWillReceiveProps',
-        value: function componentWillReceiveProps(nextProps) {
-            this.slides = this.addClickEventForClickable(nextProps.children, nextProps.clickable);
-            this.updatePortals();
-        }
-    }, {
-        key: 'componentDidMount',
-        value: function componentDidMount() {
-            this.options.selector = this.siemaWrapper;
-            this.siemaInstance = new _siema2.default(this.options);
-            this.updatePortals();
-            this.forceUpdate();
-        }
-    }, {
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            this.siemaInstance.destroy(false);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return React.createElement(React.Fragment, null, React.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)), this.slides.length > 0 && this.portals.length > 0 && this.slides.map(this.renderIntoPortal));
-        }
-    }]);
-
+    };
+    Siema.prototype.componentDidMount = function () {
+        this.options.selector = this.siemaWrapper;
+        this.siemaInstance = new siema_1.default(this.options);
+        this.updatePortals(); // will cause rerender
+    };
+    Siema.prototype.componentDidUpdate = function () {
+        this.updatePortals(); // may cause rerender
+    };
+    Siema.prototype.componentWillUnmount = function () {
+        this.siemaInstance.destroy(false);
+    };
+    Siema.prototype.render = function () {
+        this.slides = this.addClickEventForClickable(this.props.children, this.props.clickable);
+        return react_1.default.createElement(react_1.default.Fragment, null, react_1.default.createElement(SiemaWrapper, { innerRef: this.getSiemaWrapperRef, className: this.props.className }, this.slides.map(this.wrapSlide)), this.slides.length > 0 && this.portals.length > 0 && this.slides.slice(0, this.portals.length).map(this.renderIntoPortal));
+    };
     return Siema;
-}(React.Component);
-
+}(react_1.default.PureComponent);
 exports.default = Siema;
 //# sourceMappingURL=siema-react.js.map
