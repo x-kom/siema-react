@@ -30,7 +30,7 @@ class SiemaWrapper extends React.Component<{ innerRef: (el: HTMLElement) => void
     }
 }
 
-class Siema extends React.Component<SiemaReactProps> {
+class Siema extends React.PureComponent<SiemaReactProps> {
     private siemaWrapper;
     private siemaInstance: SiemaBase;
     private slides: React.ComponentType[];
@@ -167,7 +167,6 @@ class Siema extends React.Component<SiemaReactProps> {
 
     public render() {
         this.slides = this.addClickEventForClickable(this.props.children, this.props.clickable);
-
         return (
             <React.Fragment>
                 <SiemaWrapper innerRef={this.getSiemaWrapperRef} className={this.props.className}>
