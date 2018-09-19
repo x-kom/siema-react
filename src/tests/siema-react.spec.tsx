@@ -1,12 +1,15 @@
-import * as React from 'react';
+import React from 'react';
 import Siema from '../lib/siema-react';
 import { mount, ReactWrapper } from 'enzyme';
+
+const ExampleChildren = ({ img, onClick }: { img: any; onClick?: () => void }) => <div onClick={onClick}><img src={img} alt="Siema image" /></div>;
+const createExampleSlides = (images: string[]) => images.map((img, index) => <ExampleChildren key={index} img={img} />);
+const findPortalsContaining = (component: ReactWrapper<any>, type) => component.find('Portal').filterWhere((n) => n.find(type).length > 0);
 
 describe('Siema react', () => {
     let component: ReactWrapper;
     let handleChange: () => void;
     const images: string[] = ['http://via.placeholder.com/350x150/FFC0CB?text=1', 'http://via.placeholder.com/350x150/ADD8E6?text=2', 'http://via.placeholder.com/350x150/FFC0CB?text=3'];
-    const ExampleChildren = ({ img, onClick }: { img: any; onClick?: () => void }) => <div onClick={onClick}><img src={img} alt="Siema image" /></div>;
     const defaultSiemaOptions = {
         duration: 200,
         easing: 'ease-out',
@@ -27,14 +30,18 @@ describe('Siema react', () => {
 
         component = mount(
             <Siema clickable={true} onChange={handleChange}>
-                {images.map((img, index) => <ExampleChildren key={index} img={img} />)}
-            </Siema>);
+                {createExampleSlides(images)}
+            </Siema>
+        );
     });
 
-    it('should properly mount component with all given children', () => {
+    it('should properly mount component with all given children inside SiemaWrapper for proper first render and SSR experience', () => {
         expect(component).toHaveLength(1);
-        expect(component.children().filterWhere((n) => n.type() === ExampleChildren)).toHaveLength(images.length)
         expect(component.find('SiemaWrapper').find(ExampleChildren)).toHaveLength(images.length);
+    });
+
+    it('should render all children into portals after mounting', () => {
+        expect(findPortalsContaining(component, ExampleChildren)).toHaveLength(images.length);
     });
 
     it('should have default Siema props', () => {
@@ -56,7 +63,7 @@ describe('Siema react', () => {
     it('should not add onClick method for children when clickable is not set', () => {
         component = mount(
             <Siema onChange={handleChange}>
-                {images.map((img, index) => <ExampleChildren key={index} img={img} />)}
+                {createExampleSlides(images)}
             </Siema>);
 
         component.find(ExampleChildren).forEach((node) => expect(node).not.toHaveProperty('onClick'));
@@ -77,5 +84,13 @@ describe('Siema react', () => {
         }
 
         expect(handleChange).toHaveBeenCalledTimes(3);
+    });
+
+    it('should adjust to number of children change', () => {
+        component.setProps({ children: createExampleSlides(images.slice(0, images.length - 1)) });
+        expect(findPortalsContaining(component, ExampleChildren)).toHaveLength(images.length - 1);
+        component.setProps({ children: createExampleSlides(images.concat(['http://via.placeholder.com/350x150/FFC0CB?text=X'])) });
+        component.update(); // the component seems to works just fine but there is probably a bug in enzyme which causes it to not update the number of portals in this case, unless the `update()` is called on wrapper
+        expect(findPortalsContaining(component, ExampleChildren)).toHaveLength(images.length + 1);
     });
 });
