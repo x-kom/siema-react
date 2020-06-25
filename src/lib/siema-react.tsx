@@ -23,6 +23,7 @@ class Siema extends React.Component<SiemaReactProps> {
     public prev: SiemaBase['prev'] = (...args) => { this.siemaInstance.prev(...args); };
     public next: SiemaBase['next'] = (...args) => { this.siemaInstance.next(...args); };
     public goTo: SiemaBase['goTo'] = (...args) => { this.siemaInstance.goTo(...args); };
+    public resizeHandler = (...args) => { this.siemaInstance.resizeHandler(...args); };
 
     constructor(props: SiemaReactProps) {
         super(props);
