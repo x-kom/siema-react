@@ -17,6 +17,7 @@ declare class Siema extends React.PureComponent<SiemaReactProps> {
     prev: SiemaBase['prev'];
     next: SiemaBase['next'];
     goTo: SiemaBase['goTo'];
+    recalculateSizes: () => void;
     constructor(props: SiemaReactProps);
     private getSiemaWrapperRef;
     private addClickEventForClickable;

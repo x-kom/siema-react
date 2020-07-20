@@ -50,6 +50,9 @@ var Siema = /** @class */function (_super) {
             var _a;
             (_a = _this.siemaInstance).goTo.apply(_a, args);
         }; // TODO: improve types
+        _this.recalculateSizes = function () {
+            _this.siemaInstance.resizeHandler();
+        }; // TODO: also improve types
         _this.getSiemaWrapperRef = function (element) {
             _this.siemaWrapper = element;
         };
