@@ -13,7 +13,10 @@ var SiemaWrapper = /** @class */function (_super) {
     }
     // since all further children updates will be handled in "componentWillReceiveProps" of the main Siema component
     // we render this wrapper only once at the beginning for the slides to be visible in SSR output and for proper `hydrate` after that
-    SiemaWrapper.prototype.shouldComponentUpdate = function () {
+    SiemaWrapper.prototype.shouldComponentUpdate = function (nextProps) {
+        if (nextProps.className !== this.props.className) {
+            return true;
+        }
         return false;
     };
     SiemaWrapper.prototype.render = function () {
